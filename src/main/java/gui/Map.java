@@ -36,6 +36,8 @@ public class Map extends Panel {
 	Tree[] treespos = new Tree[TREECOUNT];
 	Tree[] branchespos = new Tree[BRANCHESCOUNT];
 	RGB bkgColor = new TextColor.RGB(165, 127, 61);
+        int [] bridgepos = new int[2];
+        RGB bridge_Color = new TextColor.RGB(195, 92, 52);
 	
 	Characters _chars;
 
@@ -79,10 +81,22 @@ public class Map extends Panel {
 							graphics.putString(t.getmPosition().getColumn(), t.getmPosition().getRow(), String.valueOf(t.getmTree()));
 						}
                                                 
-						/*
+						graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
+                                                int locBridge = mRand.nextInt(waterpos.length);
+                                                
+                                                /*
+						 * Creates the bridge
+						 */
+                                                for(int i=0; i<waterpos.length; i++){
+                                                    if(i == locBridge){
+                                                        graphics.setForegroundColor(bridge_Color);
+                                                        bridgepos = new int[]{waterpos[i],i};
+                                                    }
+                                                }
+                                                
+                                                /*
 						 * Creates the river
 						 */
-						graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
 						for (int i = 0; i < waterpos.length; i++) {
 							graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
 							graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
@@ -105,7 +119,7 @@ public class Map extends Panel {
                                                 /*
 						 * Creates a lake
 						 */
-						for (int i = 0; i < lakepos.length; i++) {
+						/*for (int i = 0; i < lakepos.length; i++) {
 							for(int l = 0; l < i; l++){
                                                         graphics.setBackgroundColor(new TextColor.RGB(30, 150, 150));
 							graphics.putString(lakepos[i][l], i, String.valueOf(SymbolsMirk.WATER[2]));
@@ -115,7 +129,7 @@ public class Map extends Panel {
 							graphics.putString(lakepos[i][l]-2, i, String.valueOf(SymbolsMirk.WATER[0]));
 							graphics.putString(lakepos[i][l]+2, i, String.valueOf(SymbolsMirk.WATER[0]));
                                                         }
-						}
+						}*/
 						
 						/*
 						 * Draw characters
