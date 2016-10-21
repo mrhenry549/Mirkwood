@@ -85,16 +85,6 @@ public class Map extends Panel {
                                                 int locBridge = mRand.nextInt(waterpos.length);
                                                 
                                                 /*
-						 * Creates the bridge
-						 */
-                                                for(int i=0; i<waterpos.length; i++){
-                                                    if(i == locBridge){
-                                                        graphics.setForegroundColor(bridge_Color);
-                                                        bridgepos = new int[]{waterpos[i],i};
-                                                    }
-                                                }
-                                                
-                                                /*
 						 * Creates the river
 						 */
 						for (int i = 0; i < waterpos.length; i++) {
@@ -105,6 +95,13 @@ public class Map extends Panel {
 							graphics.putString(waterpos[i]+1, i, String.valueOf(SymbolsMirk.WATER[1]));
 							graphics.putString(waterpos[i]-2, i, String.valueOf(SymbolsMirk.WATER[0]));
 							graphics.putString(waterpos[i]+2, i, String.valueOf(SymbolsMirk.WATER[0]));
+                                                        
+                                                        if(i == locBridge){
+                                                        graphics.setForegroundColor(bridge_Color);
+                                                        graphics.setForegroundColor(bridge_Color);
+							graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
+                                                        bridgepos = new int[]{waterpos[i],i};
+                                                    }
 						}
                                                 for (int i = 0; i < waterpos2.length; i++) {
 							graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
@@ -114,6 +111,13 @@ public class Map extends Panel {
 							graphics.putString(i, waterpos2[i]+1, String.valueOf(SymbolsMirk.WATER[1]));
 							graphics.putString(i, waterpos2[i]-2, String.valueOf(SymbolsMirk.WATER[0]));
 							graphics.putString(i, waterpos2[i]+2, String.valueOf(SymbolsMirk.WATER[0]));
+                                                        
+                                                        if(i == locBridge){
+                                                        graphics.setForegroundColor(bridge_Color);
+                                                        graphics.setForegroundColor(bridge_Color);
+							graphics.putString(i, waterpos2[i], String.valueOf(SymbolsMirk.WATER[2]));
+                                                        bridgepos = new int[]{i, waterpos2[i]};
+                                                    }
 						}
                                                 
                                                 /*
