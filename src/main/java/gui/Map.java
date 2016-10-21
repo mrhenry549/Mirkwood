@@ -103,7 +103,7 @@ public class Map extends Panel {
                                                         bridgepos = new int[]{waterpos[i],i};
                                                     }
 						}
-                                                for (int i = 0; i < waterpos2.length; i++) {
+                                                /*for (int i = 0; i < waterpos2.length; i++) {
 							graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
 							graphics.putString(i, waterpos2[i], String.valueOf(SymbolsMirk.WATER[2]));
 							graphics.setBackgroundColor(bkgColor);
@@ -118,7 +118,7 @@ public class Map extends Panel {
 							graphics.putString(i, waterpos2[i], String.valueOf(SymbolsMirk.WATER[2]));
                                                         bridgepos = new int[]{i, waterpos2[i]};
                                                     }
-						}
+						}*/
                                                 
                                                 /*
 						 * Creates a lake
