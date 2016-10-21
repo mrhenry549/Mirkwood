@@ -31,6 +31,7 @@ public class Map extends Panel {
 	int[] playerpos = new int[]{2, 2};
 	
 	int[] waterpos = new int[LINES];
+        int[] waterpos2 = new int[COLUMNS];
 	Tree[] treespos = new Tree[TREECOUNT];
 	Tree[] branchespos = new Tree[BRANCHESCOUNT];
 	RGB bkgColor = new TextColor.RGB(165, 127, 61);
@@ -90,6 +91,15 @@ public class Map extends Panel {
 							graphics.putString(waterpos[i]-2, i, String.valueOf(SymbolsMirk.WATER[0]));
 							graphics.putString(waterpos[i]+2, i, String.valueOf(SymbolsMirk.WATER[0]));
 						}
+                                                for (int i = 0; i < waterpos2.length; i++) {
+							graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
+							graphics.putString(i, waterpos2[i], String.valueOf(SymbolsMirk.WATER[2]));
+							graphics.setBackgroundColor(bkgColor);
+							graphics.putString(i, waterpos2[i]-1, String.valueOf(SymbolsMirk.WATER[1]));
+							graphics.putString(i, waterpos2[i]+1, String.valueOf(SymbolsMirk.WATER[1]));
+							graphics.putString(i, waterpos2[i]-2, String.valueOf(SymbolsMirk.WATER[0]));
+							graphics.putString(i, waterpos2[i]+2, String.valueOf(SymbolsMirk.WATER[0]));
+						}
 						
 						/*
 						 * Draw characters
@@ -115,8 +125,12 @@ public class Map extends Panel {
 	
 	public void generateWater() {
 		int col = mRand.nextInt(COLUMNS);
+                int lin = mRand.nextInt(LINES);
 		for (int i = 0; i < LINES; i++) {
 			waterpos[i] = col + (mRand.nextInt(2) - 1);
+		}
+                for (int i = 0; i < COLUMNS; i++) {
+			waterpos2[i] = lin + (mRand.nextInt(2) - 1);
 		}
 	}
 	
@@ -139,13 +153,25 @@ public class Map extends Panel {
 		case 'w':
 			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
 			break;
+                case 'W':
+			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
+			break;
 		case 's':
+			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow()+1));
+			break;
+                case 'S':
 			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow()+1));
 			break;
 		case 'a':
 			player.set_position(new TerminalPosition(ppos.getColumn()-1, ppos.getRow()));
 			break;
+                case 'A':
+			player.set_position(new TerminalPosition(ppos.getColumn()-1, ppos.getRow()));
+			break;
 		case 'd':
+			player.set_position(new TerminalPosition(ppos.getColumn()+1, ppos.getRow()));
+			break;
+                case 'D':
 			player.set_position(new TerminalPosition(ppos.getColumn()+1, ppos.getRow()));
 			break;
 		default:
