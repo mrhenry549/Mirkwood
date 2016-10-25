@@ -82,7 +82,7 @@ public class Map extends Panel {
                             graphics.putString(t.getmPosition().getColumn(), t.getmPosition().getRow(), String.valueOf(t.getmTree()));
                         }
 
-                        graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
+                        graphics.setForegroundColor(new TextColor.RGB(22, 111, 223));
                         int locBridge = mRand.nextInt(waterpos.length);
 
                         /*
@@ -94,10 +94,10 @@ public class Map extends Panel {
                             while (c == 0) {
                                 c += 1;
                                 if (i == locBridge) {
-                                    graphics.putString(waterpos[brid], i, String.valueOf(SymbolsMirk.BRIDG));
+                                    graphics.putString(waterpos[brid], i, String.valueOf(SymbolsMirk.BRIDGE));
                                     graphics.setBackgroundColor(bridge_Color);
-                                    graphics.putString(waterpos[brid] - 1, i, String.valueOf(SymbolsMirk.BRIDG));
-                                    graphics.putString(waterpos[brid] + 1, i, String.valueOf(SymbolsMirk.BRIDG));
+                                    graphics.putString(waterpos[brid] - 1, i, String.valueOf(SymbolsMirk.BRIDGE));
+                                    graphics.putString(waterpos[brid] + 1, i, String.valueOf(SymbolsMirk.BRIDGE));
                                 }
                             }
 
@@ -116,10 +116,10 @@ public class Map extends Panel {
                             while (c == 0) {
                                 c += 1;
                                 if (i == locBridge) {
-                                    graphics.putString(i, waterpos2[brid], String.valueOf(SymbolsMirk.BRIDG));
+                                    graphics.putString(i, waterpos2[brid], String.valueOf(SymbolsMirk.BRIDGE));
                                     graphics.setBackgroundColor(bridge_Color);
-                                    graphics.putString(i, waterpos2[brid] - 1, String.valueOf(SymbolsMirk.BRIDG));
-                                    graphics.putString(i, waterpos2[brid] + 1, String.valueOf(SymbolsMirk.BRIDG));
+                                    graphics.putString(i, waterpos2[brid] - 1, String.valueOf(SymbolsMirk.BRIDGE));
+                                    graphics.putString(i, waterpos2[brid] + 1, String.valueOf(SymbolsMirk.BRIDGE));
                                 }
                             }
 
