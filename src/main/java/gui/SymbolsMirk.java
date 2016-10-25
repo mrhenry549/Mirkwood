@@ -7,5 +7,5 @@ public class SymbolsMirk {
     public static final char[] TREES = new char[]{'¥', 'Î', 'Ý'};
     public static final char HERO = 'φ';
     public static final char FOE = 'Θ';
-    public static final char BRIDG = '=';
+    public static final char BRIDG = '▓';
 }

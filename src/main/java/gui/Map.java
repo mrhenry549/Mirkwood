@@ -28,7 +28,7 @@ public class Map extends Panel {
 
     Random mRand, bridge;
 
-    int caca;
+    int c;
     int[] playerpos = new int[]{2, 2};
     int[] waterpos = new int[LINES];
     int[] waterpos2 = new int[COLUMNS];
@@ -90,6 +90,16 @@ public class Map extends Panel {
                          */
                         for (int i = 0; i < waterpos.length; i++) {
                             final int brid = bridge.nextInt(LINES - 1);
+                            
+                            while (c == 0) {
+                                c += 1;
+                                if (i == brid) {
+                                    graphics.putString(waterpos[brid], i, String.valueOf(SymbolsMirk.BRIDG));
+                                    graphics.setBackgroundColor(bridge_Color);
+                                    graphics.putString(waterpos[brid] - 1, i, String.valueOf(SymbolsMirk.BRIDG));
+                                    graphics.putString(waterpos[brid] + 1, i, String.valueOf(SymbolsMirk.BRIDG));
+                                }
+                            }
 
                             graphics.setBackgroundColor(new TextColor.RGB(0, 109, 204));
                             graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
@@ -98,16 +108,6 @@ public class Map extends Panel {
                             graphics.putString(waterpos[i] + 1, i, String.valueOf(SymbolsMirk.WATER[1]));
                             graphics.putString(waterpos[i] - 2, i, String.valueOf(SymbolsMirk.WATER[0]));
                             graphics.putString(waterpos[i] + 2, i, String.valueOf(SymbolsMirk.WATER[0]));
-
-                            while (caca == 0) {
-                                caca += 1;
-                                if (i == brid) {
-                                    graphics.putString(waterpos[brid], i, String.valueOf(SymbolsMirk.BRIDG));
-                                    graphics.setBackgroundColor(bridge_Color);
-                                    graphics.putString(waterpos[brid] - 1, i, String.valueOf(SymbolsMirk.BRIDG));
-                                    graphics.putString(waterpos[brid] + 1, i, String.valueOf(SymbolsMirk.BRIDG));
-                                }
-                            }
                         }
                         /*for (int i = 0; i < waterpos2.length; i++) {
 							graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
@@ -118,8 +118,8 @@ public class Map extends Panel {
 							graphics.putString(i, waterpos2[i]-2, String.valueOf(SymbolsMirk.WATER[0]));
 							graphics.putString(i, waterpos2[i]+2, String.valueOf(SymbolsMirk.WATER[0]));
                                                         
-                                                        while (caca == 0) {
-                                                            caca += 1;
+                                                        while (c == 0) {
+                                                            c += 1;
                                                             if (i == brid) {
                                                                 graphics.putString(i, waterpos2[brid], String.valueOf(SymbolsMirk.BRIDG));
                                                                 graphics.setBackgroundColor(bridge_Color);
