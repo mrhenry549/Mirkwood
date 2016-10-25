@@ -28,145 +28,146 @@ import script.Hero;
 import util.AudioFilePlayer;
 
 public class Mirror {
-	Terminal terminal;
-	Screen screen;
-	Panel pStatus, pMap;
-	Map map;
 
-	MultiWindowTextGUI board;
+    Terminal terminal;
+    Screen screen;
+    Panel pStatus, pMap;
+    Map map;
 
-	Hero hero;
-	Characters _chars;
-	
-	AudioFilePlayer ap;
+    MultiWindowTextGUI board;
 
-	public Mirror() {
-		try {
-			init();
+    Hero hero;
+    Characters _chars;
 
-			_chars = new Characters();
+    AudioFilePlayer ap;
 
-			buildPanels();
+    public Mirror() {
+        try {
+            init();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            _chars = new Characters();
 
-	}
+            buildPanels();
 
-	private void init() throws IOException {
-		terminal = new DefaultTerminalFactory().createTerminal();	
-		screen = new TerminalScreen(terminal);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-		_chars = new Characters();
-		map = new Map(_chars);
+    }
 
-		screen.startScreen();
-		board = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLACK));
+    private void init() throws IOException {
+        terminal = new DefaultTerminalFactory().createTerminal();
+        screen = new TerminalScreen(terminal);
 
-	}
+        _chars = new Characters();
+        map = new Map(_chars);
 
-	private void buildPanels(){
-	    BasicWindow window = new BasicWindow();
-	    window.setTitle("Mirror");
-	    window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
+        screen.startScreen();
+        board = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLACK));
 
-	    Panel mainPanel = new Panel();
-	    mainPanel.setLayoutManager(new GridLayout(2));
+    }
 
-	    pStatus = new PanelStatus();
+    private void buildPanels() {
+        BasicWindow window = new BasicWindow();
+        window.setTitle("Mirror");
+        window.setHints(Arrays.asList(Window.Hint.FULL_SCREEN));
 
-	    PanelStory pstory = new PanelStory();
+        Panel mainPanel = new Panel();
+        mainPanel.setLayoutManager(new GridLayout(2));
 
-	    mainPanel.addComponent(pStatus.withBorder(Borders.singleLine("Status")));
-	    mainPanel.addComponent(map.withBorder(Borders.singleLine("Map")));
-	    mainPanel.addComponent(new EmptySpace());
-	    mainPanel.addComponent(pstory);
+        pStatus = new PanelStatus();
 
-	    window.setComponent(mainPanel);
-	    
-	    
-	    window.addWindowListener(new WindowListener() {
-			
-			public void onUnhandledInput(Window arg0, KeyStroke keyStroke, AtomicBoolean arg2) {
-				// TODO Auto-generated method stub
-				map.updatePlayer(keyStroke);
-				
-				if(keyStroke.getCharacter() == 'f') {
-					BasicWindow diaFight = new WFight(Mirror.this);
-					
-					ap.stop();
-					board.addWindow(diaFight);
-					diaFight.addWindowListener(new WindowListener() {
-						
-						@Override
-						public void onUnhandledInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
-							// TODO Auto-generated method stub
-							
-						}
-						
-						@Override
-						public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
-							// TODO Auto-generated method stub
-							
-						}
-						
-						@Override
-						public void onResized(Window arg0, TerminalSize arg1, TerminalSize arg2) {
-							// TODO Auto-generated method stub
-							
-						}
-						
-						@Override
-						public void onMoved(Window arg0, TerminalPosition arg1, TerminalPosition arg2) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
-					
-				} else if (keyStroke.getCharacter() == 'm') {
-					if (ap.isPlaying())
-						ap.stop();
-					else
-						ap.startPlaying();
-				}
-			}
-			
-			public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void onResized(Window arg0, TerminalSize arg1, TerminalSize arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void onMoved(Window arg0, TerminalPosition arg1, TerminalPosition arg2) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+        PanelStory pstory = new PanelStory();
 
-		ap = AudioFilePlayer.getFilePlayer("myst.ogg");
-		
-		ap.startPlaying();
-	          
+        mainPanel.addComponent(pStatus.withBorder(Borders.singleLine("Status")));
+        mainPanel.addComponent(map.withBorder(Borders.singleLine("Map")));
+        mainPanel.addComponent(new EmptySpace());
+        mainPanel.addComponent(pstory);
+
+        window.setComponent(mainPanel);
+
+        window.addWindowListener(new WindowListener() {
+
+            public void onUnhandledInput(Window arg0, KeyStroke keyStroke, AtomicBoolean arg2) {
+                // TODO Auto-generated method stub
+                map.updatePlayer(keyStroke);
+
+                if (keyStroke.getCharacter() == 'f') {
+                    BasicWindow diaFight = new WFight(Mirror.this);
+
+                    ap.stop();
+                    board.addWindow(diaFight);
+                    diaFight.addWindowListener(new WindowListener() {
+
+                        @Override
+                        public void onUnhandledInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
+                            // TODO Auto-generated method stub
+
+                        }
+
+                        @Override
+                        public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
+                            // TODO Auto-generated method stub
+
+                        }
+
+                        @Override
+                        public void onResized(Window arg0, TerminalSize arg1, TerminalSize arg2) {
+                            // TODO Auto-generated method stub
+
+                        }
+
+                        @Override
+                        public void onMoved(Window arg0, TerminalPosition arg1, TerminalPosition arg2) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
+
+                } else if (keyStroke.getCharacter() == 'm') {
+                    if (ap.isPlaying()) {
+                        ap.stop();
+                    } else {
+                        ap.startPlaying();
+                    }
+                }
+            }
+
+            public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void onResized(Window arg0, TerminalSize arg1, TerminalSize arg2) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void onMoved(Window arg0, TerminalPosition arg1, TerminalPosition arg2) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        ap = AudioFilePlayer.getFilePlayer("myst.ogg");
+
+        ap.startPlaying();
+
 //	    window.setSize(new TerminalSize(Map.COLUMNS+50, Map.LINES+10));
-	    board.addWindowAndWait(window);
-	    
-	   
-	}
-	
-	public void musicStatus(boolean status) {
-		if (status)
-			ap.startPlaying();
-		else 
-			ap.stop();
-	}
-	
-	/*
+        board.addWindowAndWait(window);
+
+    }
+
+    public void musicStatus(boolean status) {
+        if (status) {
+            ap.startPlaying();
+        } else {
+            ap.stop();
+        }
+    }
+
+    /*
 	public void playMusic(){
 	    try {
 	    	/*
@@ -195,6 +196,5 @@ public class Mirror {
 	        ex.printStackTrace();
 	    }
 	}
-	*/
-
+     */
 }
