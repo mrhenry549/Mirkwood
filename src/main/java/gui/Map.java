@@ -135,13 +135,25 @@ public class Map extends Panel {
 		case 'w':
 			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
 			break;
+                case 'W':
+			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
+			break;
 		case 's':
+			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow()+1));
+			break;
+                case 'S':
 			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow()+1));
 			break;
 		case 'a':
 			player.set_position(new TerminalPosition(ppos.getColumn()-1, ppos.getRow()));
 			break;
+                case 'A':
+			player.set_position(new TerminalPosition(ppos.getColumn()-1, ppos.getRow()));
+			break;
 		case 'd':
+			player.set_position(new TerminalPosition(ppos.getColumn()+1, ppos.getRow()));
+			break;
+                case 'D':
 			player.set_position(new TerminalPosition(ppos.getColumn()+1, ppos.getRow()));
 			break;
 		default:

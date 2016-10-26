@@ -1,10 +1,11 @@
 package artefactos;
 
-import static gui.Map.BRANCHESCOUNT;
+//import static gui.Map.BRANCHESCOUNT;
+import com.googlecode.lanterna.TextColor;
 import static gui.Map.COLUMNS;
 import static gui.Map.LINES;
 import static gui.Map.TREECOUNT;
-import gui.Tree;
+//import gui.Tree;
 
 public class LayerTrees extends MapLayer {
 
