@@ -50,6 +50,7 @@ public class Map extends Panel {
 		mRand = new Random();
 		
 		generateWater();
+                LayerTrees trees = new LayerTrees();
 
 		land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
 			protected ComponentRenderer<EmptySpace> createDefaultRenderer() {
@@ -66,7 +67,6 @@ public class Map extends Panel {
 						graphics.setModifiers(EnumSet.of(SGR.BOLD));
 						graphics.fill(' ');
 					
-                                                LayerTrees trees = new LayerTrees();
                                                 for (int x=0; x < COLUMNS; x++) {
                                                     for (int y=0; y< LINES; y++) {
                                                         Tree2 t = (Tree2) trees.getMap()[x][y];
