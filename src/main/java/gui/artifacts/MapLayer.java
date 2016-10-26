@@ -2,29 +2,19 @@ package gui.artifacts;
 
 import gui.Map;
 
-public abstract class MapLayer {
+public class MapLayer {
 
-    protected MapObject[][] maplayer = new MapObject[Map.LINES][Map.COLUMNS];
-    protected MapObject _theObject;
+    MapObject[][] objectos;
 
-    public MapLayer(MapObject obj) {
-        _theObject = obj;
+    public MapLayer() {
+        objectos = new MapObject[Map.COLUMNS][Map.LINES];
     }
 
-    public MapObject[][] getMaplayer() {
-        return maplayer;
+    public MapObject[][] getMap() {
+        return objectos;
     }
 
-    public void setMaplayer(MapObject[][] maplayer) {
-        this.maplayer = maplayer;
+    public void setObjectos(MapObject[][] objectos) {
+        this.objectos = objectos;
     }
-
-    public MapObject getTheObject() {
-        return _theObject;
-    }
-
-    public void setTheObject(MapObject _theObject) {
-        this._theObject = _theObject;
-    }
-
 }

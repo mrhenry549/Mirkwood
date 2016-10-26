@@ -13,6 +13,8 @@ import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextGUIGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
+import gui.artifacts.LayerTrees;
+import gui.artifacts.Tree2;
 
 import script.Characters;
 import script.Foe;
@@ -26,19 +28,16 @@ public class Map extends Panel {
     public static final int TREECOUNT = 400;
     public static final int BRANCHESCOUNT = 250;
 
-    Random mRand, bridge;
+    Random mRand;
 
-    int c;
     int[] playerpos = new int[]{2, 2};
+
     int[] waterpos = new int[LINES];
-    int[] waterpos2 = new int[COLUMNS];
-    int[][] lakepos = new int[5][15];
     Tree[] treespos = new Tree[TREECOUNT];
     Tree[] branchespos = new Tree[BRANCHESCOUNT];
-    RGB bkgColor = new TextColor.RGB(165, 127, 61);
-    int[] bridgepos = new int[2];
-    RGB bridge_Color = new TextColor.RGB(195, 92, 52);
-
+    public static RGB bkgColor = new TextColor.RGB(165, 127, 61);
+    int[] bridge_pos = new int[1];
+    RGB bridge_color = new TextColor.RGB(155, 92, 52);
     Characters _chars;
 
     EmptySpace land;
@@ -50,10 +49,10 @@ public class Map extends Panel {
         getBasePane();
 
         mRand = new Random();
-        bridge = new Random();
 
         generateWater();
         generateTrees();
+        final int locBridge = mRand.nextInt(waterpos.length);
 
         land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
             protected ComponentRenderer<EmptySpace> createDefaultRenderer() {
@@ -69,84 +68,47 @@ public class Map extends Panel {
                         graphics.setBackgroundColor(bkgColor);
                         graphics.setModifiers(EnumSet.of(SGR.BOLD));
                         graphics.fill(' ');
+                        
+                        LayerTrees trees = new LayerTrees();
+                        for (int x=0; x<COLUMNS; x++){
+                            for (int y=0; y<LINES; y++){
+                                Tree2 t2 = (Tree2) trees.getMap()[x][y];
+                                if(t2 != null){
+                                    graphics.setBackgroundColor(t2.getBackgroundColor());
+                                    graphics.setForegroundColor(t2.getForegroundColor());
+                                    graphics.putString(x, y, String.valueOf(t2.getSymbol()));
+                                }
+                            }
+                        }
 
                         /*
 						 * Creates the trees and branches
                          */
-                        for (Tree t : treespos) {
-                            graphics.setForegroundColor(t.getColor());
-                            graphics.putString(t.getmPosition().getColumn(), t.getmPosition().getRow(), String.valueOf(t.getmTree()));
-                        }
-                        for (Tree t : branchespos) {
-                            graphics.setForegroundColor(t.getColor());
-                            graphics.putString(t.getmPosition().getColumn(), t.getmPosition().getRow(), String.valueOf(t.getmTree()));
-                        }
-
-                        graphics.setForegroundColor(new TextColor.RGB(22, 111, 223));
-                        int locBridge = mRand.nextInt(waterpos.length);
-
-                        /*
-						 * Creates the rivers
+ /*
+						 * Creates the river
                          */
-                        for (int i = 0; i < waterpos.length; i++) {
-                            final int brid = bridge.nextInt(LINES - 1);
-                            
-                            while (c == 0) {
-                                c += 1;
-                                if (i == locBridge) {
-                                    graphics.putString(waterpos[brid], i, String.valueOf(SymbolsMirk.BRIDGE));
-                                    graphics.setBackgroundColor(bridge_Color);
-                                    graphics.putString(waterpos[brid] - 1, i, String.valueOf(SymbolsMirk.BRIDGE));
-                                    graphics.putString(waterpos[brid] + 1, i, String.valueOf(SymbolsMirk.BRIDGE));
-                                }
-                            }
+                        graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
 
-                            graphics.setBackgroundColor(new TextColor.RGB(0, 109, 204));
+                        for (int i = 0; i < waterpos.length; i++) {
+                            graphics.setForegroundColor(TextColor.ANSI.BLUE);
+                            graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
                             graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
                             graphics.setBackgroundColor(bkgColor);
                             graphics.putString(waterpos[i] - 1, i, String.valueOf(SymbolsMirk.WATER[1]));
                             graphics.putString(waterpos[i] + 1, i, String.valueOf(SymbolsMirk.WATER[1]));
                             graphics.putString(waterpos[i] - 2, i, String.valueOf(SymbolsMirk.WATER[0]));
                             graphics.putString(waterpos[i] + 2, i, String.valueOf(SymbolsMirk.WATER[0]));
-                        }
-                        
-                        for (int i = 0; i < waterpos2.length; i++) {
-                            final int brid = bridge.nextInt(LINES - 1);
+                            graphics.putString(14, 4, String.valueOf(SymbolsMirk.WATER[2]));
 
-                            while (c == 0) {
-                                c += 1;
-                                if (i == locBridge) {
-                                    graphics.putString(i, waterpos2[brid], String.valueOf(SymbolsMirk.BRIDGE));
-                                    graphics.setBackgroundColor(bridge_Color);
-                                    graphics.putString(i, waterpos2[brid] - 1, String.valueOf(SymbolsMirk.BRIDGE));
-                                    graphics.putString(i, waterpos2[brid] + 1, String.valueOf(SymbolsMirk.BRIDGE));
-                                }
+                            if (i == locBridge) {
+                                graphics.setBackgroundColor(bridge_color);
+                                graphics.setForegroundColor(bridge_color);
+                                graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
+                                bridge_pos = new int[]{waterpos[i], i};
                             }
-
-                            graphics.setBackgroundColor(new TextColor.RGB(0, 109, 204));
-                            graphics.putString(i, waterpos2[i], String.valueOf(SymbolsMirk.WATER[2]));
-                            graphics.setBackgroundColor(bkgColor);
-                            graphics.putString(i, waterpos2[i] - 1, String.valueOf(SymbolsMirk.WATER[1]));
-                            graphics.putString(i, waterpos2[i] + 1, String.valueOf(SymbolsMirk.WATER[1]));
-                            graphics.putString(i, waterpos2[i] - 2, String.valueOf(SymbolsMirk.WATER[0]));
-                            graphics.putString(i, waterpos2[i] + 2, String.valueOf(SymbolsMirk.WATER[0]));
                         }
 
- /*
-						 * Creates a lake
-                         */
- /*for (int i = 0; i < lakepos.length; i++) {
-							for(int l = 0; l < i; l++){
-                                                        graphics.setBackgroundColor(new TextColor.RGB(30, 150, 150));
-							graphics.putString(lakepos[i][l], i, String.valueOf(SymbolsMirk.WATER[2]));
-							graphics.setBackgroundColor(bkgColor);
-							graphics.putString(lakepos[i][l]-1, i, String.valueOf(SymbolsMirk.WATER[1]));
-							graphics.putString(lakepos[i][l]+1, i, String.valueOf(SymbolsMirk.WATER[1]));
-							graphics.putString(lakepos[i][l]-2, i, String.valueOf(SymbolsMirk.WATER[0]));
-							graphics.putString(lakepos[i][l]+2, i, String.valueOf(SymbolsMirk.WATER[0]));
-                                                        }
-						}*/
- /*
+                        /*
 						 * Draw characters
                          */
                         Hero h = _chars.getHero();
@@ -170,12 +132,8 @@ public class Map extends Panel {
 
     public void generateWater() {
         int col = mRand.nextInt(COLUMNS);
-        int lin = mRand.nextInt(LINES);
         for (int i = 0; i < LINES; i++) {
             waterpos[i] = col + (mRand.nextInt(2) - 1);
-        }
-        for (int i = 0; i < COLUMNS; i++) {
-            waterpos2[i] = lin + (mRand.nextInt(2) - 1);
         }
     }
 

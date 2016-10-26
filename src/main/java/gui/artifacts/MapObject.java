@@ -1,54 +1,25 @@
 package gui.artifacts;
 
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
+//import com.googlecode.lanterna.terminal.Terminal;
+import java.util.Random;
 
-public abstract class MapObject {
+public class MapObject {
 
-    TerminalPosition position;
-    boolean free;
-    boolean visible;
     char symbol;
     TextColor.RGB foregroundColor;
     TextColor.RGB backgroundColor;
 
-    public MapObject(TerminalPosition position, boolean free, boolean visible, char symbol, TextColor.RGB foregroundColor, TextColor.RGB backgroundColor) {
-        this.position = position;
-        this.free = free;
-        this.visible = visible;
+    Random _rand;
+
+    public MapObject() {
+        _rand = new Random();
+    }
+
+    public MapObject(char symbol, TextColor.RGB foregroundColor, TextColor.RGB backgroundColor) {
         this.symbol = symbol;
         this.foregroundColor = foregroundColor;
         this.backgroundColor = backgroundColor;
-    }
-
-    public MapObject(TerminalPosition position, boolean free, boolean visible) {
-        this.position = position;
-        this.free = free;
-        this.visible = visible;
-    }
-
-    public TerminalPosition getPosition() {
-        return position;
-    }
-
-    public void setPosition(TerminalPosition position) {
-        this.position = position;
-    }
-
-    public boolean isFree() {
-        return free;
-    }
-
-    public void setFree(boolean free) {
-        this.free = free;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
     }
 
     public char getSymbol() {
@@ -74,7 +45,5 @@ public abstract class MapObject {
     public void setBackgroundColor(TextColor.RGB backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
-
-    
 
 }
