@@ -18,7 +18,7 @@ public class MapObject {
     TextColor.RGB foregroundColor;
     TextColor.RGB backgroundColor;
     
-    Random _rand;
+    protected Random _rand;
     
     public MapObject() {
         _rand = new Random();

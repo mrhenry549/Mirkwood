@@ -16,6 +16,8 @@ public abstract class Character extends MapObject {
             power,
             attack,
             defense;
+    
+    char symb;
 
     public Character(int hp, int power, int attack, int defense) {
         this.hp = hp;
@@ -55,8 +57,17 @@ public abstract class Character extends MapObject {
     public void setDefense(int defense) {
         this.defense = defense;
     }  
+
+    public char getSymb() {
+        return symb;
+    }
+
+    public void setSymb(char symb) {
+        this.symb = symb;
+    }
     
     public void attack(){}
     
     public void defense(){}
+    
 }

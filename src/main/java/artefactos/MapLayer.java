@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MapLayer {
     MapObject[][] objectos;
-    Random _rand;
+    protected Random _rand;
     
     public MapLayer() {
         objectos = new MapObject[Map.COLUMNS][Map.LINES];

@@ -1,5 +1,6 @@
 package gui;
 
+import artefactos.LayerFoes;
 import artefactos.LayerTrees;
 import artefactos.Tree2;
 import java.util.EnumSet;
@@ -51,6 +52,8 @@ public class Map extends Panel {
 		
 		generateWater();
                 LayerTrees trees = new LayerTrees();
+                LayerFoes foes = new LayerFoes();
+                //generateTrees();
 
 		land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
 			protected ComponentRenderer<EmptySpace> createDefaultRenderer() {
