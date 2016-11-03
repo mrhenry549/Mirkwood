@@ -1,5 +1,6 @@
 package artefactos;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.util.Random;
@@ -11,6 +12,7 @@ public class MapObject {
     TextColor.RGB backgroundColor;
 
     boolean walkthrough;
+    TerminalPosition position;
 
     protected Random _rand;
 
@@ -18,10 +20,19 @@ public class MapObject {
         _rand = new Random();
     }
 
-    public MapObject(char symbol, TextColor.RGB foregroundColor, TextColor.RGB backgroundColor) {
+    public MapObject(TerminalPosition position, char symbol, TextColor.RGB foregroundColor, TextColor.RGB backgroundColor) {
+        this.position = position;
         this.symbol = symbol;
         this.foregroundColor = foregroundColor;
         this.backgroundColor = backgroundColor;
+    }
+
+    public TerminalPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(TerminalPosition position) {
+        this.position = position;
     }
 
     public char getSymbol() {

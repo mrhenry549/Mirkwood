@@ -2,9 +2,9 @@ package gui;
 
 import artefactos.LayerFoes;
 import artefactos.LayerTrees;
+import artefactos.LayerWater;
 import artefactos.MapLayer;
 import artefactos.MapObject;
-//import artefactos.Tree2;
 import java.util.EnumSet;
 import java.util.Random;
 
@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import script.Characters;
 import script.Foe;
 import script.Hero;
-//import script.Orc;
-//import script.Spider;
 
 public class Map extends Panel {
 
@@ -32,15 +30,15 @@ public class Map extends Panel {
     public static final int LINES = 16;
 
     public static final int TREECOUNT = 400;
-    public static final int BRANCHESCOUNT = 250;
+    //public static final int BRANCHESCOUNT = 250;
 
     Random mRand;
 
     int[] playerpos = new int[]{2, 2};
 
     int[] waterpos = new int[LINES];
-    Tree[] treespos = new Tree[TREECOUNT];
-    Tree[] branchespos = new Tree[BRANCHESCOUNT];
+    //Tree[] treespos = new Tree[TREECOUNT];
+    //Tree[] branchespos = new Tree[BRANCHESCOUNT];
     public static RGB bkgColor = new TextColor.RGB(165, 127, 61);
 
     Characters _chars;
@@ -56,14 +54,14 @@ public class Map extends Panel {
         getBasePane();
 
         mRand = new Random();
-
-        generateWater();
+        
         LayerTrees trees = new LayerTrees();
-        LayerFoes foes = new LayerFoes();
-
+        LayerWater water = new LayerWater(); 
+        LayerFoes foes = new LayerFoes();      
+        
         layers.add(trees);
+        layers.add(water);
         layers.add(foes);
-        //generateTrees();
 
         land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
             protected ComponentRenderer<EmptySpace> createDefaultRenderer() {
@@ -80,16 +78,6 @@ public class Map extends Panel {
                         graphics.setModifiers(EnumSet.of(SGR.BOLD));
                         graphics.fill(' ');
 
-                        /*for (int x=0; x < COLUMNS; x++) {
-                            for (int y=0; y< LINES; y++) {
-                                MapObject o = ( MapObject) foes.getMap()[x][y];
-                                if (o != null) {
-                                    graphics.setBackgroundColor(o.getBackgroundColor());
-                                    graphics.setForegroundColor(o.getForegroundColor());
-                                    graphics.putString(x, y, String.valueOf(o.getSymbol()));
-                                }
-                            }
-                        }*/
                         for (MapLayer ml : layers) {
                             for (int x = 0; x < COLUMNS; x++) {
                                 for (int y = 0; y < LINES; y++) {
@@ -106,7 +94,7 @@ public class Map extends Panel {
                         /*
 						 * Creates the river
                          */
-                        graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
+                        /*graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
                         for (int i = 0; i < waterpos.length; i++) {
                             graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
                             graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
@@ -115,7 +103,7 @@ public class Map extends Panel {
                             graphics.putString(waterpos[i] + 1, i, String.valueOf(SymbolsMirk.WATER[1]));
                             graphics.putString(waterpos[i] - 2, i, String.valueOf(SymbolsMirk.WATER[0]));
                             graphics.putString(waterpos[i] + 2, i, String.valueOf(SymbolsMirk.WATER[0]));
-                        }
+                        }*/
 
                         /*
 						 * Draw characters
@@ -139,13 +127,6 @@ public class Map extends Panel {
 
     }
 
-    public void generateWater() {
-        int col = mRand.nextInt(COLUMNS);
-        for (int i = 0; i < LINES; i++) {
-            waterpos[i] = col + (mRand.nextInt(2) - 1);
-        }
-    }
-
     public void refreshLand() {
         land.invalidate();
     }
@@ -155,35 +136,73 @@ public class Map extends Panel {
         Hero player = _chars.getHero();
         switch (keyStroke.getCharacter()) {
             case 'w':
-                player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
+                if (canPass(ppos.getColumn(), ppos.getRow() - 1)) {
+                    player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
+                }
                 break;
             case 'W':
-                player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
+                if (canPass(ppos.getColumn(), ppos.getRow() - 1)) {
+                    player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
+                }
                 break;
             case 's':
-                player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1));
+                if (canPass(ppos.getColumn(), ppos.getRow() + 1)) {
+                    player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1));
+                }
                 break;
             case 'S':
-                player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1));
+                if (canPass(ppos.getColumn(), ppos.getRow() + 1)) {
+                    player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1));
+                }
                 break;
             case 'a':
-                player.set_position(new TerminalPosition(ppos.getColumn() - 1, ppos.getRow()));
+                if (canPass(ppos.getColumn() - 1, ppos.getRow())) {
+                    player.set_position(new TerminalPosition(ppos.getColumn() - 1, ppos.getRow()));
+                }
                 break;
             case 'A':
-                player.set_position(new TerminalPosition(ppos.getColumn() - 1, ppos.getRow()));
+                if (canPass(ppos.getColumn() - 1, ppos.getRow())) {
+                    player.set_position(new TerminalPosition(ppos.getColumn() - 1, ppos.getRow()));
+                }
                 break;
             case 'd':
-                player.set_position(new TerminalPosition(ppos.getColumn() + 1, ppos.getRow()));
+                if (canPass(ppos.getColumn() + 1, ppos.getRow())) {
+                    player.set_position(new TerminalPosition(ppos.getColumn() + 1, ppos.getRow()));
+                }
                 break;
             case 'D':
-                player.set_position(new TerminalPosition(ppos.getColumn() + 1, ppos.getRow()));
+                if (canPass(ppos.getColumn() + 1, ppos.getRow())) {
+                    player.set_position(new TerminalPosition(ppos.getColumn() + 1, ppos.getRow()));
+                }
                 break;
             default:
                 System.out.println(keyStroke.getCharacter().toString());
                 break;
         }
-
+        
         refreshLand();
+        
+    }
+    
+    /*
+                            * Pass through trees and river
+    */
+    
+    private boolean canPass(int x, int y) {
+        for (MapLayer ml : layers) {
+            if (ml.getMap()[x][y] != null) {
+                MapObject[][] map = ml.getMap();
+                MapObject mo = map[x][y];
+                if (!ml.getMap()[x][y].isWalkthrough()) {
+                {
+                    //return false;
+                    return true;
+                }
+            }
+        }
+    }
+
+    return true;
     }
 
     /*
