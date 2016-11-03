@@ -1,25 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artefactos;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.terminal.Terminal;
 import java.util.Random;
 
-/**
- *
- * @author Trainerpl022
- */
 public class MapObject {
+
     char symbol;
     TextColor.RGB foregroundColor;
     TextColor.RGB backgroundColor;
-    
+
+    boolean walkthrough;
+
     protected Random _rand;
-    
+
     public MapObject() {
         _rand = new Random();
     }
@@ -53,6 +47,13 @@ public class MapObject {
     public void setBackgroundColor(TextColor.RGB backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
-    
-    
+
+    public boolean isWalkthrough() {
+        return walkthrough;
+    }
+
+    public void setWalkthrough(boolean walkthrough) {
+        this.walkthrough = walkthrough;
+    }
+
 }

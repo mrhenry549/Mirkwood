@@ -4,7 +4,7 @@ import artefactos.LayerFoes;
 import artefactos.LayerTrees;
 import artefactos.MapLayer;
 import artefactos.MapObject;
-import artefactos.Tree2;
+//import artefactos.Tree2;
 import java.util.EnumSet;
 import java.util.Random;
 
@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import script.Characters;
 import script.Foe;
 import script.Hero;
-import script.Orc;
-import script.Spider;
+//import script.Orc;
+//import script.Spider;
 
 public class Map extends Panel {
 
@@ -47,6 +47,8 @@ public class Map extends Panel {
 
     EmptySpace land;
 
+    ArrayList<MapLayer> layers = new ArrayList();
+
     public Map(Characters chars) {
         super();
 
@@ -58,8 +60,7 @@ public class Map extends Panel {
         generateWater();
         LayerTrees trees = new LayerTrees();
         LayerFoes foes = new LayerFoes();
-        
-        ArrayList<MapLayer> layers = new ArrayList();
+
         layers.add(trees);
         layers.add(foes);
         //generateTrees();
@@ -81,7 +82,7 @@ public class Map extends Panel {
 
                         /*for (int x=0; x < COLUMNS; x++) {
                             for (int y=0; y< LINES; y++) {
-                                MapObject o = (MapObject) foes.getMap()[x][y];
+                                MapObject o = ( MapObject) foes.getMap()[x][y];
                                 if (o != null) {
                                     graphics.setBackgroundColor(o.getBackgroundColor());
                                     graphics.setForegroundColor(o.getForegroundColor());
@@ -89,7 +90,7 @@ public class Map extends Panel {
                                 }
                             }
                         }*/
-                        for (MapLayer ml : layers){
+                        for (MapLayer ml : layers) {
                             for (int x = 0; x < COLUMNS; x++) {
                                 for (int y = 0; y < LINES; y++) {
                                     MapObject t = (MapObject) ml.getMap()[x][y];
