@@ -29,7 +29,7 @@ public class Map extends Panel {
     public static final int COLUMNS = 50;
     public static final int LINES = 16;
 
-    public static final int TREECOUNT = 400;
+    public static final int TREECOUNT = 300;
     //public static final int BRANCHESCOUNT = 250;
 
     Random mRand;
@@ -90,20 +90,6 @@ public class Map extends Panel {
                                 }
                             }
                         }
-
-                        /*
-						 * Creates the river
-                         */
-                        /*graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
-                        for (int i = 0; i < waterpos.length; i++) {
-                            graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
-                            graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
-                            graphics.setBackgroundColor(bkgColor);
-                            graphics.putString(waterpos[i] - 1, i, String.valueOf(SymbolsMirk.WATER[1]));
-                            graphics.putString(waterpos[i] + 1, i, String.valueOf(SymbolsMirk.WATER[1]));
-                            graphics.putString(waterpos[i] - 2, i, String.valueOf(SymbolsMirk.WATER[0]));
-                            graphics.putString(waterpos[i] + 2, i, String.valueOf(SymbolsMirk.WATER[0]));
-                        }*/
 
                         /*
 						 * Draw characters
@@ -195,8 +181,8 @@ public class Map extends Panel {
                 MapObject mo = map[x][y];
                 if (!ml.getMap()[x][y].isWalkthrough()) {
                 {
-                    //return false;
-                    return true;
+                    return false;
+                    //return true;
                 }
             }
         }
