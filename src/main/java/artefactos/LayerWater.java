@@ -21,9 +21,9 @@ public class LayerWater extends MapLayer {
             waterpos[i] = col + (_rand.nextInt(2) - 1);
 
             /*this.objectos[waterpos[i] + 2][i] = new Water2(SymbolsMirk.WATER[0]);
-            this.objectos[waterpos[i] - 2][i] = new Water2(SymbolsMirk.WATER[0]);
+            this.objectos[waterpos[i] - 2][i] = new Water2(SymbolsMirk.WATER[0]);*/
             this.objectos[waterpos[i] + 1][i] = new Water2(SymbolsMirk.WATER[1]);
-            this.objectos[waterpos[i] - 1][i] = new Water2(SymbolsMirk.WATER[1]);*/
+            this.objectos[waterpos[i] - 1][i] = new Water2(SymbolsMirk.WATER[1]);
             this.objectos[waterpos[i]][i] = new Water2(SymbolsMirk.WATER[2]);
         }
     }
