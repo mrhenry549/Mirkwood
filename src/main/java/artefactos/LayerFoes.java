@@ -1,8 +1,8 @@
 package artefactos;
 
+import com.googlecode.lanterna.TerminalPosition;
 import static gui.Map.COLUMNS;
 import static gui.Map.LINES;
-import gui.SymbolsMirk;
 import script.Orc;
 import script.Spider;
 
@@ -26,12 +26,11 @@ public class LayerFoes extends MapLayer {
     }
     
     public void generateColumnOfOrcs() {
-        int col = 4;
+        int col = 3;
         for (int i = 0; i < LINES; i++) {
-
-            orcLine[i] = col + (_rand.nextInt(2) - 1);
-
-            this.objectos[orcLine[i]][i] = new Orc();
+                orcLine[i] = col;
+                if(i%2==0)
+                    this.objectos[orcLine[i]][i] = new Orc();
         }
     }
 
