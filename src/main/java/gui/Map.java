@@ -2,6 +2,7 @@ package gui;
 
 import artefactos.LayerFoes;
 import artefactos.LayerGold;
+import artefactos.LayerPotion;
 import artefactos.LayerTrees;
 import artefactos.LayerWater;
 import artefactos.MapLayer;
@@ -31,7 +32,8 @@ public class Map extends Panel {
     public static final int LINES = 16;
 
     public static final int TREECOUNT = 300;
-    public static final int GOLDCOUNT = 20;
+    public static final int GOLDCOUNT = 10;
+    public static final int POTIONCOUNT = 10;
     //public static final int BRANCHESCOUNT = 250;
 
     Random mRand;
@@ -61,10 +63,12 @@ public class Map extends Panel {
         LayerWater water = new LayerWater(); 
         LayerFoes foes = new LayerFoes();
         LayerGold gold = new LayerGold();
+        LayerPotion potion = new LayerPotion();
         
         layers.add(trees);
         layers.add(water);
         layers.add(gold);
+        layers.add(potion);
         layers.add(foes);
 
         land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
@@ -179,6 +183,16 @@ public class Map extends Panel {
     */
     
     private boolean canPass(int x, int y) {
+        
+        if (y <0)
+            return false;
+        else if (y > COLUMNS - 1)
+            return false;
+        else if (x <0)
+            return false;
+        else if (x > LINES - 1)
+            return false;
+        
         for (MapLayer ml : layers) {
             if (ml.getMap()[x][y] != null) {
                 MapObject[][] map = ml.getMap();
