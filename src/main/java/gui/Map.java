@@ -182,7 +182,18 @@ public class Map extends Panel {
         refreshLand();
     }
         
-        private boolean isPositionAvailable(TerminalPosition pos) {
+        private boolean isPositionAvailable(TerminalPosition pos) {                     
+            /*
+             * Bounds
+             */
+            if (pos.getColumn() <0)
+                return false;
+            else if (pos.getColumn() > COLUMNS -1)
+                return false;
+            else if (pos.getRow() <0)
+                return false;
+            else if (pos.getRow() > LINES -1)
+                return false;
             
             for (MapLayer ml : _layers) {
                 for (int i = 0; i < COLUMNS; i++) {
