@@ -194,7 +194,7 @@ public class Map extends Panel {
                 return false;
             else if (pos.getRow() > LINES -1)
                 return false;
-            
+            // mudancas novas
             for (MapLayer ml : _layers) {
                 for (int i = 0; i < COLUMNS; i++) {
                     for (int j = 0; j < LINES; j++) {
