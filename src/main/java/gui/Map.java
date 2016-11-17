@@ -14,6 +14,10 @@ import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.TextGUIGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
+import gui.artifacts.LayerRiver;
+import gui.artifacts.MapLayer;
+import gui.artifacts.MapObject;
+import java.util.ArrayList;
 
 import script.Characters;
 import script.Foe;
@@ -27,14 +31,14 @@ public class Map extends Panel {
 	public static final int TREECOUNT = 400;
 	public static final int BRANCHESCOUNT = 250;
 	
-	Random mRand;
 	
 	int[] playerpos = new int[]{2, 2};
 	
-	int[] waterpos = new int[LINES];
 	Tree[] treespos = new Tree[TREECOUNT];
 	Tree[] branchespos = new Tree[BRANCHESCOUNT];
-	RGB bkgColor = new TextColor.RGB(165, 127, 61);
+	public static RGB bkgColor = new TextColor.RGB(165, 127, 61);
+        
+        ArrayList<MapLayer> _layers;
 	
 	Characters _chars;
 
@@ -42,13 +46,20 @@ public class Map extends Panel {
 
 	public Map(Characters chars) {
 		super();
+                
+                
+                /*
+                Create the respective layers
+                */
+                _layers = new ArrayList<MapLayer>();
+                _layers.add(new LayerRiver());
 
 		_chars = chars;
 		getBasePane();
 		
-		mRand = new Random();
+//		mRand = new Random();
 		
-		generateWater();
+//		generateWater();
 		generateTrees();
 
 		land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
@@ -79,18 +90,23 @@ public class Map extends Panel {
 						}
 						
 						/*
-						 * Creates the river
+						 * Creates the objects of layers
 						 */
-						graphics.setForegroundColor(new TextColor.RGB(30, 150, 200));
-						for (int i = 0; i < waterpos.length; i++) {
-							graphics.setBackgroundColor(new TextColor.RGB(30, 150, 100));
-							graphics.putString(waterpos[i], i, String.valueOf(SymbolsMirk.WATER[2]));
-							graphics.setBackgroundColor(bkgColor);
-							graphics.putString(waterpos[i]-1, i, String.valueOf(SymbolsMirk.WATER[1]));
-							graphics.putString(waterpos[i]+1, i, String.valueOf(SymbolsMirk.WATER[1]));
-							graphics.putString(waterpos[i]-2, i, String.valueOf(SymbolsMirk.WATER[0]));
-							graphics.putString(waterpos[i]+2, i, String.valueOf(SymbolsMirk.WATER[0]));
-						}
+                                            for (MapLayer ml : _layers) {
+                                                for (int i = 0; i < COLUMNS; i++) {
+                                                    for (int j = 0; j < LINES; j++) {
+                                                        MapObject mo = ml.getMaplayer()[i][j];
+                                                        if (mo != null) {
+                                                            graphics.setForegroundColor(mo.getForegroundColor());
+                                                            graphics.setBackgroundColor(mo.getBackgroundColor());
+                                                            graphics.putString(mo.getPosition(), String.valueOf(mo.getSymbol()));
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                                    
+                                                    
+
 						
 						/*
 						 * Draw characters
@@ -114,13 +130,6 @@ public class Map extends Panel {
 
 	}
 	
-	public void generateWater() {
-		int col = mRand.nextInt(COLUMNS);
-		for (int i = 0; i < LINES; i++) {
-			waterpos[i] = col + (mRand.nextInt(2) - 1);
-		}
-	}
-	
 	public void generateTrees() {
 		for (int i=0; i < TREECOUNT; i++)
 			treespos[i] = Tree.factoryRandomTree(COLUMNS, LINES);
@@ -133,29 +142,75 @@ public class Map extends Panel {
 		land.invalidate();
 	}
 	
-	public void updatePlayer(KeyStroke keyStroke) {
-		TerminalPosition ppos = _chars.getHero().get_position();
-		Hero player = _chars.getHero();
-		switch (keyStroke.getCharacter()) {
-		case 'w':
-			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1));
-			break;
-		case 's':
-			player.set_position(new TerminalPosition(ppos.getColumn(), ppos.getRow()+1));
-			break;
-		case 'a':
-			player.set_position(new TerminalPosition(ppos.getColumn()-1, ppos.getRow()));
-			break;
-		case 'd':
-			player.set_position(new TerminalPosition(ppos.getColumn()+1, ppos.getRow()));
-			break;
-		default:
-			System.out.println(keyStroke.getCharacter().toString());
-			break;
-		}
-		
-		refreshLand();
-	}
+    public void updatePlayer(KeyStroke keyStroke) {
+        TerminalPosition ppos = _chars.getHero().get_position();
+        Hero player = _chars.getHero();
+        switch (keyStroke.getCharacter()) {
+            case 'w': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1);
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
+            case 's': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1);
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
+            case 'a': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn() - 1, ppos.getRow());
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
+            case 'd': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn() + 1, ppos.getRow());
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
+            default:
+                System.out.println(keyStroke.getCharacter().toString());
+                break;
+        }
+
+        refreshLand();
+    }
+        
+        private boolean isPositionAvailable(TerminalPosition pos) {                     
+            /*
+             * Bounds
+             */
+            if (pos.getColumn() <0)
+                return false;
+            else if (pos.getColumn() > COLUMNS -1)
+                return false;
+            else if (pos.getRow() <0)
+                return false;
+            else if (pos.getRow() > LINES -1)
+                return false;
+            
+            for (MapLayer ml : _layers) {
+                for (int i = 0; i < COLUMNS; i++) {
+                    for (int j = 0; j < LINES; j++) {
+                        MapObject mo = ml.getMaplayer()[i][j];
+                        if (mo != null) {
+                            if (mo.getPosition().getColumn() == pos.getColumn() && 
+                                    mo.getPosition().getRow() == pos.getRow() &&
+                                    !mo.isFree())
+                                return false;
+                        }
+                    }
+                }
+            }
+            
+            return true;
+        }
 
 	/*
 	 * @Override protected void onAfterDrawing(TextGUIGraphics graphics) { //
