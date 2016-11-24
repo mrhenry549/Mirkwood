@@ -17,84 +17,85 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioFilePlayer {
 
-	SourceDataLine line = null;
-	String file;
-	Thread bkgmusic;
+    SourceDataLine line = null;
+    String file;
+    Thread bkgmusic;
 
-	public AudioFilePlayer(String file) {
-		this.file = file;
-	}
+    public AudioFilePlayer(String file) {
+        this.file = file;
+    }
 
-	public static AudioFilePlayer getFilePlayer(String file) {
-		return new AudioFilePlayer(file);
-	}
-	
-	public void startPlaying() {
-		bkgmusic = new Thread(){
-	          public void run() {
-	        	  play();
-	          };
-		};
+    public static AudioFilePlayer getFilePlayer(String file) {
+        return new AudioFilePlayer(file);
+    }
+
+    public void startPlaying() {
+        bkgmusic = new Thread() {
+            public void run() {
+                play();
+            }
+        ;
+        };
 		bkgmusic.start();
-	}
-	
-	private void play() {
-		URL urlfile = getClass().getClassLoader().getResource(file);
-		final File file = new File(urlfile.getFile()).getAbsoluteFile();
-		try (final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
+    }
 
-			try (final AudioInputStream in = getAudioInputStream(file)) {
+    private void play() {
+        URL urlfile = getClass().getClassLoader().getResource(file);
+        final File file = new File(urlfile.getFile()).getAbsoluteFile();
+        try (final AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
 
-				final AudioFormat outFormat = getOutFormat(in.getFormat());
-				final Info info = new Info(SourceDataLine.class, outFormat);
-				line = (SourceDataLine) AudioSystem.getLine(info);
-				if (line != null) {
+            try (final AudioInputStream in = getAudioInputStream(file)) {
 
-					try {
-						line.open(outFormat);
-						line.start();
-						stream(getAudioInputStream(outFormat, in), line);
-					
-						line.drain();
-						line.stop();
-					} catch (LineUnavailableException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+                final AudioFormat outFormat = getOutFormat(in.getFormat());
+                final Info info = new Info(SourceDataLine.class, outFormat);
+                line = (SourceDataLine) AudioSystem.getLine(info);
+                if (line != null) {
 
-				}
-			} catch (LineUnavailableException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (UnsupportedAudioFileException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
-	
-	public void stop() {
-		bkgmusic.interrupt();
-		line.close();
-	}
-	
-	public boolean isPlaying() {
-		return line.isActive();
-	}
+                    try {
+                        line.open(outFormat);
+                        line.start();
+                        stream(getAudioInputStream(outFormat, in), line);
 
-	private AudioFormat getOutFormat(AudioFormat inFormat) {
-		final int ch = inFormat.getChannels();
-		final float rate = inFormat.getSampleRate();
-		return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
-	}
+                        line.drain();
+                        line.stop();
+                    } catch (LineUnavailableException | IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
 
-	private void stream(AudioInputStream in, SourceDataLine line) throws IOException {
-		final byte[] buffer = new byte[65536];
-		for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
-			line.write(buffer, 0, n);
-		}
-	}
+                }
+            } catch (LineUnavailableException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (UnsupportedAudioFileException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
+
+    public void stop() {
+        bkgmusic.interrupt();
+        line.close();
+    }
+
+    public boolean isPlaying() {
+        return line.isActive();
+    }
+
+    private AudioFormat getOutFormat(AudioFormat inFormat) {
+        final int ch = inFormat.getChannels();
+        final float rate = inFormat.getSampleRate();
+        return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
+    }
+
+    private void stream(AudioInputStream in, SourceDataLine line) throws IOException {
+        final byte[] buffer = new byte[65536];
+        for (int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)) {
+            line.write(buffer, 0, n);
+        }
+    }
 }
