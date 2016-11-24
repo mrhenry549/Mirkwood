@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.artifacts;
 
 import com.googlecode.lanterna.TerminalPosition;
@@ -10,10 +5,6 @@ import com.googlecode.lanterna.TextColor;
 import gui.Map;
 import gui.SymbolsMirk;
 
-/**
- *
- * @author davidsanguinetti
- */
 public class Water extends MapObject {
 
     public enum WaterType {
@@ -25,7 +16,7 @@ public class Water extends MapObject {
     public Water(TerminalPosition pos, WaterType type) {
         super(pos, true, true);
         char symbolWater = 'w';
-      
+
         switch (type) {
             case DEEP:
                 setSymbol(SymbolsMirk.WATER[2]);
@@ -45,7 +36,7 @@ public class Water extends MapObject {
             }
         }
         setForegroundColor(new TextColor.RGB(30, 150, 200));
-        
+
     }
 
 }

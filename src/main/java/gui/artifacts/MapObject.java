@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.artifacts;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 
-/**
- *
- * @author davidsanguinetti
- */
 public abstract class MapObject {
+
     TerminalPosition position;
     boolean free;
     boolean visible;
@@ -34,8 +26,6 @@ public abstract class MapObject {
         this.free = free;
         this.visible = visible;
     }
-    
-    
 
     public TerminalPosition getPosition() {
         return position;
@@ -84,7 +74,5 @@ public abstract class MapObject {
     public void setBackgroundColor(TextColor backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
-    
-    
-    
+
 }

@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.artifacts;
 
 import gui.Map;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author davidsanguinetti
- */
 public abstract class MapLayer {
 
     protected MapObject[][] maplayer = new MapObject[Map.COLUMNS][Map.LINES];
@@ -30,7 +21,7 @@ public abstract class MapLayer {
     }
 
     public MapObject[][] getMaplayer() {
-        
+
         return createLayer();
     }
 
@@ -47,9 +38,8 @@ public abstract class MapLayer {
     }
 
     protected MapObject[][] createLayer() {
-        for (MapObject mo : _artifacts)           
-        {
-             maplayer[mo.getPosition().getColumn()][mo.getPosition().getRow()] = mo;
+        for (MapObject mo : _artifacts) {
+            maplayer[mo.getPosition().getColumn()][mo.getPosition().getRow()] = mo;
         }
 
         return maplayer;

@@ -14,25 +14,24 @@ import com.googlecode.lanterna.gui2.WindowDecorationRenderer;
 import com.googlecode.lanterna.gui2.WindowPostRenderer;
 
 public class PanelStory extends Panel {
-	ScrollBar verticalScroll;
-	TextBox mLabel;
 
-	public PanelStory() {
-		setLayoutManager(new BorderLayout());
-		
-		
+    ScrollBar verticalScroll;
+    TextBox mLabel;
 
-		GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.FILL, false, true);
-		mLabel = new TextBox(
-				"It was getting dark... \nAnd you still haven't found a place to rest.\nThe last fights have left you in poor shape. \n Now you're at your peak, and everyone in Mirkwood know you by your war name. ");
+    public PanelStory() {
+        setLayoutManager(new BorderLayout());
 
-		mLabel.setReadOnly(true);
-		mLabel.setCaretWarp(true);
-		
-		setPreferredSize(new TerminalSize(Map.COLUMNS+ 2,3));
+        GridLayout.createLayoutData(GridLayout.Alignment.CENTER, GridLayout.Alignment.FILL, false, true);
+        mLabel = new TextBox(
+                "It was getting dark... \nAnd you still haven't found a place to rest.\nThe last fights have left you in poor shape. \n Now you're at your peak, and everyone in Mirkwood know you by your war name. ");
+
+        mLabel.setReadOnly(true);
+        mLabel.setCaretWarp(true);
+
+        setPreferredSize(new TerminalSize(Map.COLUMNS + 2, 3));
 //		mLabel.
-	//	addComponent(verticalScroll, BorderLayout.Location.RIGHT);
-		addComponent(mLabel, BorderLayout.Location.CENTER);
-	}
+        //	addComponent(verticalScroll, BorderLayout.Location.RIGHT);
+        addComponent(mLabel, BorderLayout.Location.CENTER);
+    }
 
 }
