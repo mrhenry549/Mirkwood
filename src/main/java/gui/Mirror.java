@@ -25,6 +25,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 import script.Characters;
 import script.Hero;
+import script.Foe;
 import util.AudioFilePlayer;
 
 public class Mirror {
@@ -93,7 +94,8 @@ public class Mirror {
                 // TODO Auto-generated method stub
                 map.updatePlayer(keyStroke);
 
-                if (keyStroke.getCharacter() == 'f') {
+                //if (keyStroke.getCharacter() == 'f') {
+                if (Hero == new TerminalPosition(Map.COLUMNS - 48, 2)) {
                     BasicWindow diaFight = new WFight(Mirror.this);
 
                     ap.stop();
@@ -166,6 +168,7 @@ public class Mirror {
             ap.stop();
         }
     }
+   
 
     /*
 	public void playMusic(){
