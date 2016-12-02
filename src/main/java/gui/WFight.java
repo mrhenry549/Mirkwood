@@ -35,7 +35,7 @@ public class WFight extends BasicWindow {
     public WFight(Mirror base) {
         super();
         this._baseWindow = base;
-        setTitle("Fight to survive!");
+        setTitle("NPC");
         setHints(Arrays.asList(Window.Hint.CENTERED));
 
         bkg_music = AudioFilePlayer.getFilePlayer("fightMusic.ogg");
@@ -88,7 +88,7 @@ public class WFight extends BasicWindow {
         pstatevent.addComponent(_lMoves);
 
         photoStatus.addComponent(pstatevent);
-        Button okButton = new Button("Run Away", new Runnable() {
+        Button okButton = new Button("No, thanks", new Runnable() {
             public void run() {
                 close();
                 bkg_music.stop();

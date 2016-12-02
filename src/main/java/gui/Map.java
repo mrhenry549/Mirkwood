@@ -149,7 +149,21 @@ public class Map extends Panel {
                 }
                 break;
             }
+            case 'W': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1);
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
             case 's': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1);
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
+            case 'S': {
                 TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1);
                 if (isPositionAvailable(npos)) {
                     player.set_position(npos);
@@ -163,7 +177,21 @@ public class Map extends Panel {
                 }
                 break;
             }
+            case 'A': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn() - 1, ppos.getRow());
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
             case 'd': {
+                TerminalPosition npos = new TerminalPosition(ppos.getColumn() + 1, ppos.getRow());
+                if (isPositionAvailable(npos)) {
+                    player.set_position(npos);
+                }
+                break;
+            }
+            case 'D': {
                 TerminalPosition npos = new TerminalPosition(ppos.getColumn() + 1, ppos.getRow());
                 if (isPositionAvailable(npos)) {
                     player.set_position(npos);
