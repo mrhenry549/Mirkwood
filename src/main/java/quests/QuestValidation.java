@@ -4,12 +4,11 @@ import quests.QuestMain;
 
 public class QuestValidation {
     boolean valid;
+    boolean monsterKill;
     
     public QuestValidation(){
-        if (valid == true){
+        if (monsterKill == true){
             QuestMain.questCount++;
-            //takeQuest;
-            valid = false;
         }
         else{
             System.out.println("This quest was already taken");
