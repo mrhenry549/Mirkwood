@@ -13,14 +13,18 @@ public class Foe {
     TerminalPosition _position;
     RGB _foregroundColor;
     RGB _bkgColor;
+    int atk, def, hp, gold;
 
-    public Foe(String _name, TerminalPosition _position) {
+    public Foe(String _name, TerminalPosition _position, int atk, int def, int hp, int gold) {
         super();
         this._name = _name;
         this._position = _position;
-
         this._bkgColor = new TextColor.RGB(0, 0, 0);
         this._foregroundColor = new TextColor.RGB(242, 238, 10);
+        this.atk = atk;
+        this.def = def;
+        this.hp = hp;
+        this.gold = gold;
     }
 
     public String get_name() {
@@ -62,4 +66,38 @@ public class Foe {
     public void set_bkgColor(RGB _bkgColor) {
         this._bkgColor = _bkgColor;
     }
+
+    public int getAtk() {
+        return atk;
+    }
+
+    public void setAtk(int atk) {
+        this.atk = atk;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+    
+    
 }
