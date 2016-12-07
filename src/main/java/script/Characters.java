@@ -3,10 +3,12 @@ package script;
 import com.googlecode.lanterna.TerminalPosition;
 
 import gui.Map;
+import java.util.ArrayList;
 
 public class Characters {
 	Hero hero;
 	Foe foe;
+        ArrayList<Foe> foes;
 	
 
 	public Characters() {
@@ -14,6 +16,10 @@ public class Characters {
 		
 		hero = new Hero("Sir Guinetti", new TerminalPosition(2, Map.LINES-2));
 		foe = new Foe("Sauron", new TerminalPosition(Map.COLUMNS-2, 2));
+                foes = new ArrayList();
+                foes.add(new Orc("Olga", new TerminalPosition(6,10)));
+                foes.add(foe);
+                
 	}
 
 	public Hero getHero() {
@@ -24,8 +30,8 @@ public class Characters {
 		this.hero = hero;
 	}
 
-	public Foe getFoe() {
-		return foe;
+	public ArrayList<Foe> getFoes() {
+		return foes;
 	}
 
 	public void setFoe(Foe foe) {

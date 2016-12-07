@@ -38,10 +38,10 @@ public class WFight extends BasicWindow {
 	    setTitle("Fight to survive!");
 	    setHints(Arrays.asList(Window.Hint.CENTERED));
 	    
-	    bkg_music = AudioFilePlayer.getFilePlayer("fightMusic.ogg");
-	    bkg_music.startPlaying();
+//	    bkg_music = AudioFilePlayer.getFilePlayer("fightMusic.ogg");
+//	    bkg_music.startPlaying();
 	    
-	    AudioFilePlayer.getFilePlayer("jump.ogg").startPlaying();
+//	    AudioFilePlayer.getFilePlayer("jump.ogg").startPlaying();
 	    
 	    		
 		Panel mPanel = new Panel(new LinearLayout(Direction.VERTICAL));
@@ -52,7 +52,7 @@ public class WFight extends BasicWindow {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		
 		TextBox pic = new TextBox(sb.toString());
@@ -95,7 +95,7 @@ public class WFight extends BasicWindow {
 		Button okButton = new Button("Run Away", new Runnable() {
             public void run() {
                 close(); 
-                bkg_music.stop();
+//                bkg_music.stop();
                 _baseWindow.musicStatus(true);
             }
         }).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Center));

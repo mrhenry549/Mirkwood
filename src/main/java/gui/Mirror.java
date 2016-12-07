@@ -22,8 +22,10 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import gui.artifacts.MapObject;
 
 import script.Characters;
+import script.Foe;
 import script.Hero;
 import util.AudioFilePlayer;
 
@@ -91,12 +93,13 @@ public class Mirror {
 			
 			public void onUnhandledInput(Window arg0, KeyStroke keyStroke, AtomicBoolean arg2) {
 				// TODO Auto-generated method stub
-				map.updatePlayer(keyStroke);
+				MapObject mo = map.updatePlayer(keyStroke);
 				
-				if(keyStroke.getCharacter() == 'f') {
+			//	if(keyStroke.getCharacter() == 'f') {
+                                if(mo instanceof Foe) {
 					BasicWindow diaFight = new WFight(Mirror.this);
 					
-					ap.stop();
+//					ap.stop();
 					board.addWindow(diaFight);
 					diaFight.addWindowListener(new WindowListener() {
 						
