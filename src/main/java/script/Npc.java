@@ -13,9 +13,9 @@ public class Npc {
     TextColor.RGB _foregroundColor;
     TextColor.RGB _bkgColor;
     int gold, getQuest;
-    boolean validQuest;
+    boolean validQuest, endQuest;
 
-    public Npc(String _name, TerminalPosition _position, int gold, int getQuest, boolean validQuest) {
+    public Npc(String _name, TerminalPosition _position, int gold, int getQuest, boolean validQuest, boolean endQuest) {
         this._name = _name;
         this._position = _position;
         this._foregroundColor =  new TextColor.RGB(255, 255, 255);
@@ -23,6 +23,7 @@ public class Npc {
         this.gold = gold;
         this.getQuest = getQuest;
         this.validQuest = validQuest;
+        this.endQuest = endQuest;
     }
     
     public String getName() {
@@ -87,6 +88,14 @@ public class Npc {
 
     public void setValidQuest(boolean validQuest) {
         this.validQuest = validQuest;
+    }
+
+    public boolean isEndQuest() {
+        return endQuest;
+    }
+
+    public void setEndQuest(boolean endQuest) {
+        this.endQuest = endQuest;
     }
 
 }

@@ -7,14 +7,15 @@ package quests;
 
 public class QuestDad {
     String dialog;
-    int nMob, nItems, gGold, gItem;
+    int nMob, nItems, gGold, gItem, questNumb;
 
-    public QuestDad(String dialog, int nMob, int nItems, int gGold, int gItem) {
+    public QuestDad(String dialog, int nMob, int nItems, int gGold, int gItem, int questNumb) {
         this.dialog = dialog;
         this.nMob = nMob;
         this.nItems = nItems;
         this.gGold = gGold;
         this.gItem = gItem;
+        this.questNumb = questNumb;
     }
 
     public String getDialog() {
@@ -55,6 +56,14 @@ public class QuestDad {
 
     public void setgItem(int gItem) {
         this.gItem = gItem;
+    }
+
+    public int getQuestNumb() {
+        return questNumb;
+    }
+
+    public void setQuestNumb(int questNumb) {
+        this.questNumb = questNumb;
     }
     
 }
