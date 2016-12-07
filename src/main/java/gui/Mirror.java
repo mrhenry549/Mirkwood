@@ -95,12 +95,9 @@ public class Mirror {
             public void onUnhandledInput(Window arg0, KeyStroke keyStroke, AtomicBoolean arg2) {
                 // TODO Auto-generated method stub
                 map.updatePlayer(keyStroke);
-                
-                TerminalPosition pposHero = hero.get_position();
-                TerminalPosition pposFoe = foe.get_position();
 
-                //if (keyStroke.getCharacter() == 'f') {
-                if (keyStroke.getCharacter() == 'f' || pposHero == pposFoe) {
+                if (keyStroke.getCharacter() == 'f') {
+                //if (keyStroke.getCharacter() == 'f' || hero.get_position() == foe.get_position()) {
                     BasicWindow diaFight = new WFight(Mirror.this);
 
                     ap.stop();
