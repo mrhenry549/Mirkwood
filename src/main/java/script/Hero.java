@@ -1,30 +1,12 @@
 package script;
 
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.TextColor.RGB;
 
-import gui.SymbolsMirk;
+public class Hero extends Character {
 
-public class Hero {
-
-    String _name;
-    char _face = SymbolsMirk.HERO;
-    TerminalPosition _position;
-    RGB _foregroundColor;
-    RGB _bkgColor;
-    int atk, def, hp, gold;
-
-    public Hero(String _name, TerminalPosition _position, int atk, int def, int hp, int gold) {
-        super();
-        this._name = _name;
-        this._position = _position;
-        this._bkgColor = new TextColor.RGB(255, 255, 255);
-        this._foregroundColor = new TextColor.RGB(20, 20, 150);
-        this.atk = atk;
-        this.def = def;
-        this.hp = hp;
-        this.gold = gold;
+    public Hero(String _name, TerminalPosition _position) {
+        super(_name, _position);
     }
 
     public String get_name() {
@@ -66,38 +48,4 @@ public class Hero {
     public void set_bkgColor(RGB _bkgColor) {
         this._bkgColor = _bkgColor;
     }
-
-    public int getAtk() {
-        return atk;
-    }
-
-    public void setAtk(int atk) {
-        this.atk = atk;
-    }
-
-    public int getDef() {
-        return def;
-    }
-
-    public void setDef(int def) {
-        this.def = def;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-    
-    
 }

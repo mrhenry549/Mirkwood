@@ -13,8 +13,11 @@ public class PanelStatus extends Panel {
 
     private Panel pStatus;
     private Label lblHP,
-            lblStamina,
-            lblPower;
+            //lblStamina,
+            //lblPower,
+            lblAtack,
+            lblDefense,
+            lblGold;
 
     public PanelStatus() {
         super(new GridLayout(2));
@@ -22,11 +25,20 @@ public class PanelStatus extends Panel {
         addComponent(new Label("HP"));
         addComponent(createLabel(lblHP, "HP"));
 
-        addComponent(new Label("Stamina"));
+        /*addComponent(new Label("Stamina"));
         addComponent(createLabel(lblStamina, "Stamina"));
 
         addComponent(new Label("Power"));
-        addComponent(createLabel(lblPower, "Power"));
+        addComponent(createLabel(lblPower, "Power"));*/
+        
+        addComponent(new Label("Atack"));
+        addComponent(createLabel(lblAtack, "Atack"));
+        
+        addComponent(new Label("Defense"));
+        addComponent(createLabel(lblDefense, "Defense"));
+        
+        addComponent(new Label("Gold"));
+        addComponent(createLabel(lblGold, "Gold"));
 
     }
 
@@ -54,7 +66,7 @@ public class PanelStatus extends Panel {
         this.lblHP = lblHP;
     }
 
-    public Label getLblStamina() {
+   /* public Label getLblStamina() {
         return lblStamina;
     }
 
@@ -68,6 +80,30 @@ public class PanelStatus extends Panel {
 
     public void setLblPower(Label lblPower) {
         this.lblPower = lblPower;
+    }*/
+
+    public Label getLblAtack() {
+        return lblAtack;
+    }
+
+    public void setLblAtack(Label lblAtack) {
+        this.lblAtack = lblAtack;
+    }
+
+    public Label getLblDefense() {
+        return lblDefense;
+    }
+
+    public void setLblDefense(Label lblDefense) {
+        this.lblDefense = lblDefense;
+    }
+
+    public Label getLblGold() {
+        return lblGold;
+    }
+
+    public void setLblGold(Label lblGold) {
+        this.lblGold = lblGold;
     }
 
 }

@@ -7,18 +7,17 @@ import com.googlecode.lanterna.TextColor.RGB;
 import gui.SymbolsMirk;
 import gui.artifacts.MapObject;
 
-public class Foe extends MapObject {
+public class Foe extends Character {
 
     String _name;
     char _face = SymbolsMirk.FOE;
     TerminalPosition _position;
 
     public Foe(String _name, TerminalPosition _position) {
-        super(_position, true, true);
+        super(_name, _position);
         this._name = _name;
         this._position = _position;
-
-        this.setForegroundColor(new TextColor.RGB(0, 0, 0));
+        setForegroundColor(new TextColor.RGB(0, 0, 0));
         this.setBackgroundColor(new TextColor.RGB(242, 238, 10));
     }
 
