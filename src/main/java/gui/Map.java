@@ -55,8 +55,8 @@ public class Map extends Panel {
         _chars = chars;
         getBasePane();
 
-        //mRand = new Random();
-        //generateWater();
+//		mRand = new Random();
+//		generateWater();
         generateTrees();
 
         land = new EmptySpace(new TextColor.RGB(165, 127, 61)) {
@@ -101,6 +101,7 @@ public class Map extends Panel {
                                 }
                             }
                         }
+                    
 
                         /*
 						 * Draw characters
@@ -111,17 +112,19 @@ public class Map extends Panel {
                         graphics.setCharacter(h.get_position(), h.get_face());
 
                         graphics.setModifiers(EnumSet.of(SGR.BLINK));
-                        Foe f = _chars.getFoe();
-                        graphics.setBackgroundColor(f.get_bkgColor());
-                        graphics.setForegroundColor(f.get_foregroundColor());
-                        graphics.setCharacter(f.get_position(), f.get_face());
+
+                        ArrayList<Foe> foes = _chars.getFoes();
+                        for (Foe f : foes) {
+                            graphics.setBackgroundColor(f.getBackgroundColor());
+                            graphics.setForegroundColor(f.getForegroundColor());
+                            graphics.setCharacter(f.get_position(), f.get_face());
+                        }
                     }
                 };
             }
         };
 
         addComponent(land);
-
     }
 
     public void generateTrees() {
@@ -138,21 +141,18 @@ public class Map extends Panel {
         land.invalidate();
     }
 
-    public void updatePlayer(KeyStroke keyStroke) {
+    public MapObject updatePlayer(KeyStroke keyStroke) {
         TerminalPosition ppos = _chars.getHero().get_position();
         Hero player = _chars.getHero();
+        MapObject obj = null;
+
         switch (keyStroke.getCharacter()) {
             case 'w': {
                 TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1);
                 if (isPositionAvailable(npos)) {
                     player.set_position(npos);
-                }
-                break;
-            }
-            case 'W': {
-                TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() - 1);
-                if (isPositionAvailable(npos)) {
-                    player.set_position(npos);
+
+                    obj = isnpc(npos);
                 }
                 break;
             }
@@ -160,13 +160,8 @@ public class Map extends Panel {
                 TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1);
                 if (isPositionAvailable(npos)) {
                     player.set_position(npos);
-                }
-                break;
-            }
-            case 'S': {
-                TerminalPosition npos = new TerminalPosition(ppos.getColumn(), ppos.getRow() + 1);
-                if (isPositionAvailable(npos)) {
-                    player.set_position(npos);
+
+                    obj = isnpc(npos);
                 }
                 break;
             }
@@ -174,13 +169,8 @@ public class Map extends Panel {
                 TerminalPosition npos = new TerminalPosition(ppos.getColumn() - 1, ppos.getRow());
                 if (isPositionAvailable(npos)) {
                     player.set_position(npos);
-                }
-                break;
-            }
-            case 'A': {
-                TerminalPosition npos = new TerminalPosition(ppos.getColumn() - 1, ppos.getRow());
-                if (isPositionAvailable(npos)) {
-                    player.set_position(npos);
+
+                    obj = isnpc(npos);
                 }
                 break;
             }
@@ -188,22 +178,20 @@ public class Map extends Panel {
                 TerminalPosition npos = new TerminalPosition(ppos.getColumn() + 1, ppos.getRow());
                 if (isPositionAvailable(npos)) {
                     player.set_position(npos);
+
+                    obj = isnpc(npos);
                 }
                 break;
             }
-            case 'D': {
-                TerminalPosition npos = new TerminalPosition(ppos.getColumn() + 1, ppos.getRow());
-                if (isPositionAvailable(npos)) {
-                    player.set_position(npos);
-                }
-                break;
-            }
-            default:
+            default: {
                 System.out.println(keyStroke.getCharacter().toString());
                 break;
+            }
         }
 
         refreshLand();
+        
+        return obj;
     }
 
     private boolean isPositionAvailable(TerminalPosition pos) {
@@ -219,7 +207,7 @@ public class Map extends Panel {
         } else if (pos.getRow() > LINES - 1) {
             return false;
         }
-        // mudanças novas
+
         for (MapLayer ml : _layers) {
             for (int i = 0; i < COLUMNS; i++) {
                 for (int j = 0; j < LINES; j++) {
@@ -236,6 +224,16 @@ public class Map extends Panel {
         }
 
         return true;
+    }
+
+    private MapObject isnpc(TerminalPosition npos) {
+        for (Foe f : _chars.getFoes()) {
+            if (f.get_position().getColumn() == npos.getColumn()
+                    && f.get_position().getRow() == npos.getRow()) {
+                return f;
+            }
+        }
+        return null;
     }
 
     /*

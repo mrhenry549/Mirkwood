@@ -25,107 +25,111 @@ import util.AudioFilePlayer;
 import util.FileSystem;
 
 public class WFight extends BasicWindow {
+	
+	Label _lMoves;
+	
+	AudioFilePlayer bkg_music;
+	AudioFilePlayer _soundEffects;
+	Mirror _baseWindow;
 
-    Label _lMoves;
+	public WFight(Mirror base){
+		super();
+		this._baseWindow = base;
+	    setTitle("Fight to survive!");
+	    setHints(Arrays.asList(Window.Hint.CENTERED));
+	    
+//	    bkg_music = AudioFilePlayer.getFilePlayer("fightMusic.ogg");
+//	    bkg_music.startPlaying();
+	    
+//	    AudioFilePlayer.getFilePlayer("jump.ogg").startPlaying();
+	    
+	    		
+		Panel mPanel = new Panel(new LinearLayout(Direction.VERTICAL));
+		StringBuilder sb = null;
+		
+		try {
+			sb = FileSystem.readFile(getClass(), "shelob.txt");
 
-    AudioFilePlayer bkg_music;
-    AudioFilePlayer _soundEffects;
-    Mirror _baseWindow;
-
-    public WFight(Mirror base) {
-        super();
-        this._baseWindow = base;
-        setTitle("NPC");
-        setHints(Arrays.asList(Window.Hint.CENTERED));
-
-        bkg_music = AudioFilePlayer.getFilePlayer("fightMusic.ogg");
-        bkg_music.startPlaying();
-
-        AudioFilePlayer.getFilePlayer("jump.ogg").startPlaying();
-
-        Panel mPanel = new Panel(new LinearLayout(Direction.VERTICAL));
-        StringBuilder sb = null;
-
-        try {
-            sb = FileSystem.readFile(getClass(), "shelob.txt");
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        TextBox pic = new TextBox(sb.toString());
-        pic.setReadOnly(true);
-        pic.setTheme(GuiFactory.getTextTheme());
-
-        Panel photoStatus = new Panel(new LinearLayout(Direction.HORIZONTAL));
-        photoStatus.addComponent(pic);
-
-        Panel pstatevent = new Panel(new LinearLayout(Direction.VERTICAL));
-        pstatevent.addComponent(new PanelStatus().withBorder(Borders.singleLine("Hero")));
-        pstatevent.addComponent(new PanelStatus().withBorder(Borders.singleLineBevel("Shelob")));
-        pstatevent.addComponent(new Label("> So we finally meet... \nPrepare to feel my sting"));
-
-        _lMoves = new Label("");
-        final boolean hit = false,
-                redhit = false;
-        final Timer timer = new Timer("ProgressBar-timer", true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+		}
+		
+		TextBox pic = new TextBox(sb.toString());
+		pic.setReadOnly(true);
+		pic.setTheme(GuiFactory.getTextTheme());
+		
+		Panel photoStatus = new Panel(new LinearLayout(Direction.HORIZONTAL));
+		photoStatus.addComponent(pic);
+		
+		Panel pstatevent = new Panel(new LinearLayout(Direction.VERTICAL));
+		pstatevent.addComponent(new PanelStatus().withBorder(Borders.singleLine("Hero")));
+		pstatevent.addComponent(new PanelStatus().withBorder(Borders.singleLineBevel("Shelob")));
+		pstatevent.addComponent(new Label("> So we finally meet... \nPrepare to feel my sting"));
+		
+		_lMoves = new Label("");
+		final boolean hit = false,
+				redhit = false;
+		final Timer timer = new Timer("ProgressBar-timer", true);
         timer.schedule(new TimerTask() {
             public void run() {
-                // _lMoves.setText("Take this " + (bla));
-
-                /*
+            	// _lMoves.setText("Take this " + (bla));
+            	
+            	
+            	
+            	/*
                 if(progressBar.getValue() == progressBar.getMax()) {
                     progressBar.setValue(0);
                 }
                 else {
                     progressBar.setValue(progressBar.getValue() + 1);
                 }
-                 */
+                */
             }
         }, 250, 250);
-
-        pstatevent.addComponent(_lMoves);
-
-        photoStatus.addComponent(pstatevent);
-        Button okButton = new Button("No, thanks", new Runnable() {
+		
+		pstatevent.addComponent(_lMoves);
+		
+		
+		photoStatus.addComponent(pstatevent);
+		Button okButton = new Button("Run Away", new Runnable() {
             public void run() {
-                close();
-                bkg_music.stop();
+                close(); 
+//                bkg_music.stop();
                 _baseWindow.musicStatus(true);
             }
         }).setLayoutData(LinearLayout.createLayoutData(LinearLayout.Alignment.Center));
-
-        mPanel.addComponent(photoStatus);
-        mPanel.addComponent(okButton);
-
-        addWindowListener(new WindowListener() {
-
-            public void onUnhandledInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
-                // TODO Auto-generated method stub
-                _lMoves.setText(String.valueOf(arg1.getCharacter()));
-                if (arg1.getCharacter() == 'h') {
-                    AudioFilePlayer.getFilePlayer("hit_op1.ogg").startPlaying();
-                }
-            }
-
-            public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
-                // TODO Auto-generated method stub
-
-            }
-
-            public void onResized(Window arg0, TerminalSize arg1, TerminalSize arg2) {
-                // TODO Auto-generated method stub
-
-            }
-
-            public void onMoved(Window arg0, TerminalPosition arg1, TerminalPosition arg2) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-        setComponent(mPanel);
-    }
+		
+		mPanel.addComponent(photoStatus);
+		mPanel.addComponent(okButton);
+		
+		addWindowListener(new WindowListener() {
+			
+			public void onUnhandledInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
+				// TODO Auto-generated method stub
+				_lMoves.setText(String.valueOf(arg1.getCharacter()));
+				if (arg1.getCharacter() == 'h')
+					AudioFilePlayer.getFilePlayer("hit_op1.ogg").startPlaying();
+			}
+			
+			public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void onResized(Window arg0, TerminalSize arg1, TerminalSize arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void onMoved(Window arg0, TerminalPosition arg1, TerminalPosition arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+		});
+		
+		setComponent(mPanel);
+	}
 }
