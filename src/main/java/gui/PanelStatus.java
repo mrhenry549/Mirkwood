@@ -14,7 +14,9 @@ public class PanelStatus extends Panel{
 	private Panel pStatus;
 	private Label lblHP,
 		lblStamina,
-		lblPower;
+		lblPower,
+                lblAttack,
+                lblDefense;
 	
 	public PanelStatus() {
 		super(new GridLayout(2));
@@ -28,7 +30,11 @@ public class PanelStatus extends Panel{
 		addComponent(new Label("Power"));
 		addComponent(createLabel(lblPower, "Power"));
 		
+                addComponent(new Label("Attack"));
+		addComponent(createLabel(lblAttack, "Attack"));
 		
+                addComponent(new Label("Defense"));
+		addComponent(createLabel(lblDefense, "Defense"));
 	}
 	
 	private Label createLabel(Label lblValue, String lbl) {
@@ -70,7 +76,4 @@ public class PanelStatus extends Panel{
 	public void setLblPower(Label lblPower) {
 		this.lblPower = lblPower;
 	}
-	
-	
-
 }
