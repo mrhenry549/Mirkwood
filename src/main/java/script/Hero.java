@@ -6,22 +6,13 @@ import com.googlecode.lanterna.TextColor.RGB;
 
 import gui.SymbolsMirk;
 
-public class Hero {
-	String _name;
-	char _face = SymbolsMirk.HERO;
-	TerminalPosition _position;
-	RGB _foregroundColor;
-	RGB _bkgColor;
-	
-	public Hero(String _name, TerminalPosition _position) {
-		super();
-		this._name = _name;
-		this._position = _position;
+public class Hero extends Character {
 
-		
-		this._bkgColor = new TextColor.RGB(255, 255, 255);
-		this._foregroundColor = new TextColor.RGB(20, 20, 150);
-	}
+    public Hero(String _name, TerminalPosition _position) {
+        super(_name, _position);
+    }
+
+	
 
 	public String get_name() {
 		return _name;
