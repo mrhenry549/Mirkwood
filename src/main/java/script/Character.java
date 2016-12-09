@@ -10,6 +10,7 @@ import com.googlecode.lanterna.TextColor;
 import gui.SymbolsMirk;
 import gui.artifacts.MapObject;
 import gui.artifacts.Misc;
+import gui.artifacts.Shield;
 import gui.artifacts.Weapon;
 import java.util.ArrayList;
 
@@ -111,6 +112,24 @@ public class Character extends MapObject {
 */
         
         return total_attack;
+    }
+    
+        public int getDefense() {
+        int total_defense = 0;
+        for (int i=0; i < inventory.size(); i++) {
+            if (inventory.get(i) instanceof Shield)
+                total_defense += inventory.get(i).getValue();
+        }
+        
+        // Foreach
+/*
+        for (Misc m : inventory) {            
+            if (m instanceof Weapon)
+                total_attack += m.getValue();
+        }
+*/
+        
+        return total_defense;
     }
     
 }
