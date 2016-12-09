@@ -9,6 +9,9 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import gui.SymbolsMirk;
 import gui.artifacts.MapObject;
+import gui.artifacts.Misc;
+import gui.artifacts.Weapon;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +23,11 @@ public class Character extends MapObject {
 	TerminalPosition _position;
 	TextColor.RGB _foregroundColor;
 	TextColor.RGB _bkgColor;
+        int gold,
+                hp;
+        
+        ArrayList<Misc> inventory;
+                
 
     public Character(String _name, TerminalPosition _position) {
         super(_position, true, true);
@@ -27,6 +35,8 @@ public class Character extends MapObject {
         this._position = _position;
         this._foregroundColor = _foregroundColor;
         this._bkgColor = _bkgColor;
+        
+        inventory = new ArrayList();                 
     }
 
     public String getName() {
@@ -67,5 +77,40 @@ public class Character extends MapObject {
 
     public void setBkgColor(TextColor.RGB _bkgColor) {
         this._bkgColor = _bkgColor;
-    }                
+    }  
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+    
+    public int getAttack() {
+        int total_attack = 0;
+        for (int i=0; i < inventory.size(); i++) {
+            if (inventory.get(i) instanceof Weapon)
+                total_attack += inventory.get(i).getValue();
+        }
+        
+        // Foreach
+/*
+        for (Misc m : inventory) {            
+            if (m instanceof Weapon)
+                total_attack += m.getValue();
+        }
+*/
+        
+        return total_attack;
+    }
+    
 }
