@@ -23,6 +23,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import gui.artifacts.MapObject;
+import gui.artifacts.Moeda;
 
 import script.Characters;
 import script.Foe;
@@ -128,7 +129,11 @@ public class Mirror {
 						}
 					});
 					
-				} else if (keyStroke.getCharacter() == 'm') {
+				} else if (mo instanceof Moeda) {
+                                    System.out.println(((Moeda) mo).getValor());
+                                    hero.getInventory().addCoin((Moeda) mo);
+                                    System.out.println(hero.getInventory().getGoldValue());
+                                }else if (keyStroke.getCharacter() == 'm') {
 					if (ap.isPlaying())
 						ap.stop();
 					else

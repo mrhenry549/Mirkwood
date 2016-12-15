@@ -39,6 +39,8 @@ public class Map extends Panel {
     public static RGB bkgColor = new TextColor.RGB(165, 127, 61);
 
     ArrayList<MapLayer> _layers;
+    
+    LayerItem _layerItem;
 
     Characters _chars;
 
@@ -52,7 +54,7 @@ public class Map extends Panel {
          */
         _layers = new ArrayList<MapLayer>();
         _layers.add(new LayerRiver());
-        _layers.add(new LayerItem());
+        _layers.add(_layerItem);
 
         _chars = chars;
         getBasePane();
@@ -155,6 +157,8 @@ public class Map extends Panel {
                     player.set_position(npos);
 
                     obj = isnpc(npos);
+                    if (obj == null)
+                        obj = isitem(npos);
                 }
                 break;
             }
@@ -164,6 +168,8 @@ public class Map extends Panel {
                     player.set_position(npos);
 
                     obj = isnpc(npos);
+                    if (obj == null)
+                        obj = isitem(npos);
                 }
                 break;
             }
@@ -173,6 +179,8 @@ public class Map extends Panel {
                     player.set_position(npos);
 
                     obj = isnpc(npos);
+                    if (obj == null)
+                        obj = isitem(npos);
                 }
                 break;
             }
@@ -182,6 +190,8 @@ public class Map extends Panel {
                     player.set_position(npos);
 
                     obj = isnpc(npos);
+                    if (obj == null)
+                        obj = isitem(npos);                    
                 }
                 break;
             }
@@ -233,6 +243,16 @@ public class Map extends Panel {
             if (f.get_position().getColumn() == npos.getColumn()
                     && f.get_position().getRow() == npos.getRow()) {
                 return f;
+            }
+        }
+        return null;
+    }
+    
+    private MapObject isitem(TerminalPosition npos) {
+        for (MapObject mo : _layerItem.getArtifacts()) {
+            if (mo.getPosition().getColumn() == npos.getColumn()
+                    && mo.getPosition().getRow() == npos.getRow()) {
+                return mo;
             }
         }
         return null;

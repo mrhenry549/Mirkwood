@@ -16,7 +16,8 @@ public class PanelStatus extends Panel{
 		lblStamina,
 		lblPower,
                 lblAttack,
-                lblDefense;
+                lblDefense,
+                lblGold;
 	
 	public PanelStatus() {
 		super(new GridLayout(2));
@@ -35,6 +36,12 @@ public class PanelStatus extends Panel{
 		
                 addComponent(new Label("Defense"));
 		addComponent(createLabel(lblDefense, "Defense"));
+                
+                addComponent(new Label("Gold"));
+                lblGold = createLabel(lblGold, "Gold");
+                lblGold.setText("0");
+		
+                addComponent(lblGold);
 	}
 	
 	private Label createLabel(Label lblValue, String lbl) {
