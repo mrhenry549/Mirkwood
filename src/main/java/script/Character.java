@@ -8,10 +8,9 @@ package script;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import gui.SymbolsMirk;
+import gui.artifacts.Inventory;
 import gui.artifacts.MapObject;
-import gui.artifacts.Misc;
 import gui.artifacts.Shield;
-import gui.artifacts.Weapon;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +26,7 @@ public class Character extends MapObject {
         int gold,
                 hp;
         
-        ArrayList<Misc> inventory;
+        Inventory inventory;
                 
 
     public Character(String _name, TerminalPosition _position) {
@@ -37,7 +36,7 @@ public class Character extends MapObject {
         this._foregroundColor = _foregroundColor;
         this._bkgColor = _bkgColor;
         
-        inventory = new ArrayList();                 
+        inventory = new Inventory();                 
     }
 
     public String getName() {
@@ -96,24 +95,12 @@ public class Character extends MapObject {
         this.hp = hp;
     }
     
-    public int getAttack() {
-        int total_attack = 0;
-        for (int i=0; i < inventory.size(); i++) {
-            if (inventory.get(i) instanceof Weapon)
-                total_attack += inventory.get(i).getValue();
-        }
+    public int getAttack() {        
         
-        // Foreach
-/*
-        for (Misc m : inventory) {            
-            if (m instanceof Weapon)
-                total_attack += m.getValue();
-        }
-*/
-        
-        return total_attack;
+        return inventory.getAttackPower();
     }
     
+    /*
         public int getDefense() {
         int total_defense = 0;
         for (int i=0; i < inventory.size(); i++) {
@@ -127,9 +114,10 @@ public class Character extends MapObject {
             if (m instanceof Weapon)
                 total_attack += m.getValue();
         }
-*/
+
         
         return total_defense;
     }
+*/
     
 }
