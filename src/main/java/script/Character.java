@@ -74,7 +74,7 @@ public class Character extends MapObject {
         
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i) instanceof Weapon) {
-                totalAtk += inventory.get(i).getValue();
+                totalAtk += inventory.get(i).getStatValue();
             }
         }
         //Foreach
@@ -92,7 +92,7 @@ public class Character extends MapObject {
         
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i) instanceof Shield) {
-                totalDef += inventory.get(i).getValue();
+                totalDef += inventory.get(i).getStatValue();
             }
         }
         

@@ -3,11 +3,9 @@ package gui.artifacts;
 public class Item extends Misc{
     
     int type;
-    
-    public Item(int value, int gold, String desc, int type) {
-        super(value, gold, desc);
-        
-        this.type = type;
+
+    public Item(int statValue, int goldValue, String name, String desc) {
+        super(statValue, goldValue, name, desc);
     }
 
     public int getType() {

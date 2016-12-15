@@ -2,29 +2,38 @@ package gui.artifacts;
 
 public class Misc {
     
-    int value, gold;
-    String desc;
+    int statValue, goldValue;
+    String name, desc;
 
-    public Misc(int value, int gold, String desc) {
-        this.value = value;
-        this.gold = gold;
+    public Misc(int statValue, int goldValue, String name, String desc) {
+        this.statValue = statValue;
+        this.goldValue = goldValue;
+        this.name = name;
         this.desc = desc;
     }
 
-    public int getValue() {
-        return value;
+    public int getStatValue() {
+        return statValue;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setStatValue(int statValue) {
+        this.statValue = statValue;
     }
 
-    public int getGold() {
-        return gold;
+    public int getGoldValue() {
+        return goldValue;
     }
 
-    public void setGold(int gold) {
-        this.gold = gold;
+    public void setGoldValue(int goldValue) {
+        this.goldValue = goldValue;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -34,5 +43,5 @@ public class Misc {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-    
+
 }
