@@ -100,6 +100,10 @@ public class Character extends MapObject {
         return inventory.getAttackPower();
     }
     
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+    
     /*
         public int getDefense() {
         int total_defense = 0;
