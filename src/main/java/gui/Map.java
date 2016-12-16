@@ -54,6 +54,9 @@ public class Map extends Panel {
          */
         _layers = new ArrayList<MapLayer>();
         _layers.add(new LayerRiver());
+        
+        
+        _layerItem = new LayerItem();
         _layers.add(_layerItem);
 
         _chars = chars;
@@ -96,7 +99,13 @@ public class Map extends Panel {
                         for (MapLayer ml : _layers) {
                             for (int i = 0; i < COLUMNS; i++) {
                                 for (int j = 0; j < LINES; j++) {
-                                    MapObject mo = ml.getMaplayer()[i][j];
+                                    MapObject mo = null;
+                                    try{
+                                     mo = ml.getMaplayer()[i][j];
+                                    }
+                                    catch (Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
                                     if (mo != null) {
                                         graphics.setForegroundColor(mo.getForegroundColor());
                                         graphics.setBackgroundColor(mo.getBackgroundColor());

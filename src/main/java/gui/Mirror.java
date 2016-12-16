@@ -64,6 +64,8 @@ public class Mirror {
 
 		_chars = new Characters();
 		map = new Map(_chars);
+                
+                hero = _chars.getHero();
 
 		screen.startScreen();
 		board = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLACK));
@@ -131,7 +133,12 @@ public class Mirror {
 					
 				} else if (mo instanceof Moeda) {
                                     System.out.println(((Moeda) mo).getValor());
+                                    try {
                                     hero.getInventory().addCoin((Moeda) mo);
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
                                     System.out.println(hero.getInventory().getGoldValue());
                                 }else if (keyStroke.getCharacter() == 'm') {
 					if (ap.isPlaying())
