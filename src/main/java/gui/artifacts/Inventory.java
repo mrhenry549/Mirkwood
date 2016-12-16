@@ -70,7 +70,7 @@ public class Inventory {
         for (int i=0; i < ar_tmp.size(); i++)
             porta_moedas.push(ar_tmp.get(i));
         
-        System.out.println(porta_moedas.peek().getValor());
+      //  System.out.println(porta_moedas.peek().getValor());
         
         return totalGold;        
     }

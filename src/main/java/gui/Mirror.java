@@ -133,6 +133,10 @@ public class Mirror {
 					
 				} else if (mo instanceof Moeda) {
                                     System.out.println(((Moeda) mo).getValor());
+                                    ((PanelStatus) pStatus).refreshStatus(hero);
+                                    // falta encapsular)
+                                    map._layerItem.getArtifacts().remove(mo);
+                                    pStatus.invalidate();
                                     try {
                                     hero.getInventory().addCoin((Moeda) mo);
                                     }

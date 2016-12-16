@@ -59,6 +59,10 @@ public class PanelStatus extends Panel{
 	public void setpStatus(Panel pStatus) {
 		this.pStatus = pStatus;
 	}
+        
+        public void refreshStatus(script.Character c) {
+            lblGold.setText(String.valueOf(c.getInventory().getGoldValue()));
+        }
 
 	public Label getLblHP() {
 		return lblHP;
