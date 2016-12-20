@@ -5,15 +5,24 @@
  */
 package gui.artifacts;
 
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
+import gui.SymbolsMirk;
+
 /**
  *
  * @author Trainerpl022
  */
 public class Item extends Misc {
     int type;
-     
-    public Item(int value, int gold, String desc, int type) {
-        super(value, gold, desc);
+
+    public Item(int value, int gold, String desc, int type, TerminalPosition position, boolean free, boolean visible) {
+        super(value, gold, desc, position, free, visible);
+        this.type = type;
+        
+        setSymbol(SymbolsMirk.WEAPON);
+        setForegroundColor(new TextColor.RGB(152, 12, 232));
+        setBackgroundColor(TextColor.ANSI.BLACK);
     }
 
     public int getType() {

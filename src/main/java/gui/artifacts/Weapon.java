@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.artifacts;
 
-/**
- *
- * @author Trainerpl022
- */
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextColor;
+import gui.SymbolsMirk;
+
 public class Weapon extends Misc {
         
-    public Weapon(int value, int gold, String desc) {
-        super(value, gold, desc);
-    }        
+    public Weapon(int value, int gold, String desc, TerminalPosition position, boolean free, boolean visible) {
+        super(value, gold, desc, position, free, visible);
+        
+        setSymbol(SymbolsMirk.WEAPON);
+        setForegroundColor(TextColor.ANSI.RED);
+        setBackgroundColor(TextColor.ANSI.BLACK);
+    }
+        
 }

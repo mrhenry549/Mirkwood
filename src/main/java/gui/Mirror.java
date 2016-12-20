@@ -24,6 +24,8 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import gui.artifacts.MapObject;
 import gui.artifacts.Moeda;
+import gui.artifacts.Weapon;
+import gui.artifacts.Shield;
 import java.util.ArrayList;
 
 import script.Characters;
@@ -144,8 +146,36 @@ public class Mirror {
                                     catch(Exception e) {
                                         System.out.println(e.getMessage());
                                     }
+                                }
+                                else if (mo instanceof Weapon) {
+                                //    System.out.println(((Moeda) mo).getValor());
+                                    // falta encapsular)
+                                    map._layerItem.removeArtifact(mo);
+                                    map.refreshLand();
+                                    pStatus.invalidate();
+                                    try {
+                                    hero.getInventory().addWeapon((Weapon) mo);
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
                                 //    System.out.println(hero.getInventory().getGoldValue());
-                                }else if (keyStroke.getCharacter() == 'm') {
+                                }
+                                else if (mo instanceof Shield) {
+                                //    System.out.println(((Moeda) mo).getValor());
+                                    // falta encapsular)
+                                    map._layerItem.removeArtifact(mo);
+                                    map.refreshLand();
+                                    pStatus.invalidate();
+                                    try {
+                                    hero.getInventory().addShield((Shield) mo);
+                                    }
+                                    catch(Exception e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                //    System.out.println(hero.getInventory().getGoldValue());
+                                }
+                                else if (keyStroke.getCharacter() == 'm') {
 					if (ap.isPlaying())
 						ap.stop();
 					else

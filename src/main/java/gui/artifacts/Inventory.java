@@ -14,6 +14,7 @@ import java.util.Stack;
  */
 public class Inventory {
     ArrayList<Weapon> inv;
+    ArrayList<Shield> invs;
     Stack<Moeda> porta_moedas;
     
     public Inventory() {
@@ -31,11 +32,25 @@ public class Inventory {
     
     public int getAttackPower() {
         int total = 0;
-        /*
-        = inv.get(0).getAttack() +
-        inv.get(1).getAttack() +
-        inv.get(2).getAttack();
-        */
+        
+        for (int i = 0; i < inv.size(); i++) {
+            total = total + inv.get(i).getValue();
+        }
+        
+        return total;
+    }
+    
+    public void addShield(Shield s) {
+        invs.add(s);
+    }
+    
+    public Shield getShield() {
+        return invs.get(0);
+    }
+    
+    public int getShieldDefence() {
+        int total = 0;
+        
         for (int i = 0; i < inv.size(); i++) {
             total = total + inv.get(i).getValue();
         }
