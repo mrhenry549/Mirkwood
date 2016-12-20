@@ -18,6 +18,7 @@ import gui.artifacts.LayerItem;
 import gui.artifacts.LayerRiver;
 import gui.artifacts.MapLayer;
 import gui.artifacts.MapObject;
+import gui.artifacts.Moeda;
 import java.util.ArrayList;
 
 import script.Characters;
@@ -31,6 +32,7 @@ public class Map extends Panel {
 
     public static final int TREECOUNT = 400;
     public static final int BRANCHESCOUNT = 250;
+    public static final int COINS = 3;
 
     int[] playerpos = new int[]{2, 2};
 
@@ -53,7 +55,7 @@ public class Map extends Panel {
                 Create the respective layers
          */
         _layers = new ArrayList<MapLayer>();
-        _layers.add(new LayerRiver());
+     //   _layers.add(new LayerRiver());
         
         
         _layerItem = new LayerItem();
@@ -111,6 +113,7 @@ public class Map extends Panel {
                                         graphics.setBackgroundColor(mo.getBackgroundColor());
                                         graphics.putString(mo.getPosition(), String.valueOf(mo.getSymbol()));
                                     }
+
                                 }
                             }
                         }

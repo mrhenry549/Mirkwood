@@ -37,7 +37,7 @@ public class Inventory {
         inv.get(2).getAttack();
         */
         for (int i = 0; i < inv.size(); i++) {
-            total = total + inv.get(i).getAttack();
+            total = total + inv.get(i).getValue();
         }
         
         return total;

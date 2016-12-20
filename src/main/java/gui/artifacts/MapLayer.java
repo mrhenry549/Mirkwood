@@ -41,6 +41,11 @@ public abstract class MapLayer {
     public ArrayList<MapObject> getArtifacts() {
         return _artifacts;
     }
+    
+    public void removeArtifact(MapObject af) {
+        _artifacts.remove(af);
+        maplayer[af.getPosition().getColumn()][af.getPosition().getRow()] = null;
+    }
 
     public void setArtifacts(ArrayList<MapObject> _artifacts) {
         this._artifacts = _artifacts;

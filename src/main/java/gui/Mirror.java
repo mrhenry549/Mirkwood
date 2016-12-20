@@ -24,6 +24,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import gui.artifacts.MapObject;
 import gui.artifacts.Moeda;
+import java.util.ArrayList;
 
 import script.Characters;
 import script.Foe;
@@ -132,10 +133,10 @@ public class Mirror {
 					});
 					
 				} else if (mo instanceof Moeda) {
-                                    System.out.println(((Moeda) mo).getValor());
-                                    ((PanelStatus) pStatus).refreshStatus(hero);
+                                //    System.out.println(((Moeda) mo).getValor());
                                     // falta encapsular)
-                                    map._layerItem.getArtifacts().remove(mo);
+                                    map._layerItem.removeArtifact(mo);
+                                    map.refreshLand();
                                     pStatus.invalidate();
                                     try {
                                     hero.getInventory().addCoin((Moeda) mo);
@@ -143,13 +144,15 @@ public class Mirror {
                                     catch(Exception e) {
                                         System.out.println(e.getMessage());
                                     }
-                                    System.out.println(hero.getInventory().getGoldValue());
+                                //    System.out.println(hero.getInventory().getGoldValue());
                                 }else if (keyStroke.getCharacter() == 'm') {
 					if (ap.isPlaying())
 						ap.stop();
 					else
 						ap.startPlaying();
 				}
+                                
+                                ((PanelStatus) pStatus).refreshStatus(hero);
 			}
 			
 			public void onInput(Window arg0, KeyStroke arg1, AtomicBoolean arg2) {

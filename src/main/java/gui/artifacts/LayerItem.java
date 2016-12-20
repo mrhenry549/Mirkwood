@@ -18,7 +18,7 @@ import gui.SymbolsMirk;
  */
 public class LayerItem extends MapLayer {
    
-    private final int MAXCOINS = 50;
+    private final int MAXCOINS = 3;
 
     public LayerItem() {
         spreadCoins();
